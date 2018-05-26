@@ -1,4 +1,4 @@
-package com.example.pokrovskyi.watter_android_app;
+package com.example.pokrovskyi.barista;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

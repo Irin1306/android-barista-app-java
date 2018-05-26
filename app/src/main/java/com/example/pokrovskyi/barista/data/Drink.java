@@ -1,4 +1,4 @@
-package com.example.pokrovskyi.watter_android_app.data;
+package com.example.pokrovskyi.barista.data;
 
 public class Drink {
 

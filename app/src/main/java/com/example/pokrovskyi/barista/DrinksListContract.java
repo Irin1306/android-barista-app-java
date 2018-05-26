@@ -1,6 +1,6 @@
-package com.example.pokrovskyi.watter_android_app;
+package com.example.pokrovskyi.barista;
 
-import com.example.pokrovskyi.watter_android_app.data.Drink;
+import com.example.pokrovskyi.barista.data.Drink;
 
 public interface DrinksListContract {
 

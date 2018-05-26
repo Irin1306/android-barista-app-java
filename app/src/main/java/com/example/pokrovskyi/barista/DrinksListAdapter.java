@@ -1,4 +1,4 @@
-package com.example.pokrovskyi.watter_android_app;
+package com.example.pokrovskyi.barista;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.pokrovskyi.watter_android_app.data.Drink;
+import com.example.pokrovskyi.barista.data.Drink;
 
 import java.util.List;
 
