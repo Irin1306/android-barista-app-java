@@ -1,6 +1,6 @@
-package com.example.pokrovskyi.barista;
+package io.brainyapps.barista;
 
-import com.example.pokrovskyi.barista.data.Drink;
+import io.brainyapps.barista.data.Drink;
 
 public interface DrinksListContract {
 

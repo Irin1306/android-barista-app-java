@@ -1,4 +1,4 @@
-package com.example.pokrovskyi.barista;
+package io.brainyapps.barista;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

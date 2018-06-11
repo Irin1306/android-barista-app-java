@@ -1,4 +1,4 @@
-package com.example.pokrovskyi.barista.data;
+package io.brainyapps.barista.data;
 
 public class Drink {
 

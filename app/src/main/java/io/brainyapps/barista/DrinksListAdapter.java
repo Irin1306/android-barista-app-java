@@ -1,4 +1,4 @@
-package com.example.pokrovskyi.barista;
+package io.brainyapps.barista;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.pokrovskyi.barista.data.Drink;
-
 import java.util.List;
+
+import io.brainyapps.barista.data.Drink;
 
 public class DrinksListAdapter extends
         RecyclerView.Adapter<DrinksListAdapter.ViewHolder>

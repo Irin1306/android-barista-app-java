@@ -1,4 +1,4 @@
-package com.example.pokrovskyi.barista;
+package io.brainyapps.barista;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.pokrovskyi.barista.data.Drink;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.brainyapps.barista.data.Drink;
 
 public class DrinksFragment extends Fragment
         implements DrinksListContract.View {
