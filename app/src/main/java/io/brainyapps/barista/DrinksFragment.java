@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.brainyapps.barista.data.Drink;
+import io.brainyapps.barista.data.entity.Drink;
 
 public class DrinksFragment extends Fragment
         implements DrinksListContract.View {

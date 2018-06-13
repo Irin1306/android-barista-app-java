@@ -1,6 +1,6 @@
 package io.brainyapps.barista;
 
-import io.brainyapps.barista.data.Drink;
+import io.brainyapps.barista.data.entity.Drink;
 
 public interface DrinksListContract {
 

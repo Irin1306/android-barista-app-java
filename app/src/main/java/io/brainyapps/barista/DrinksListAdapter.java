@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.brainyapps.barista.data.Drink;
+import io.brainyapps.barista.data.entity.Drink;
 
 public class DrinksListAdapter extends
         RecyclerView.Adapter<DrinksListAdapter.ViewHolder>
