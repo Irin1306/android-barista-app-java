@@ -1,4 +1,4 @@
-package io.brainyapps.barista;
+package io.brainyapps.barista.ui.drinks;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import io.brainyapps.barista.R;
+import io.brainyapps.barista.data.AppDataInjector;
 import io.brainyapps.barista.data.entity.Drink;
+import io.brainyapps.barista.data.source.DataRepository;
+import io.brainyapps.barista.data.source.DataSource;
 
 public class DrinksFragment extends Fragment
         implements DrinksListContract.View {
@@ -25,6 +28,8 @@ public class DrinksFragment extends Fragment
     private RecyclerView drinksListRecyclerView;
 
     private FloatingActionButton addFab, deleteFab;
+
+    private DrinksListContract.View mView = this;
 
     @Nullable
     @Override
@@ -39,25 +44,23 @@ public class DrinksFragment extends Fragment
         addFab = view.findViewById(R.id.addFab);
         deleteFab = view.findViewById(R.id.fabDelete);
 
-        List<Drink> drinks = new ArrayList<>();
+        DataRepository repository = AppDataInjector
+                .provideDataRepository(getContext());
 
-        for (int i = 0; i < 20; i++) {
-            Drink drink = new Drink();
-            drink.setId(i);
-            drink.setName("Drink #" + i);
+        repository.getAllDrinks(new DataSource.GetDrinksCallback() {
+            @Override
+            public void onDrinksLoaded(List<Drink> drinks) {
+                DrinksListAdapter drinksListAdapter =
+                        new DrinksListAdapter(mView, drinks);
 
-            drinks.add(drink);
-        }
+                RecyclerView.LayoutManager layoutManager =
+                        new GridLayoutManager(getActivity(), 1);
 
-        DrinksListAdapter drinksListAdapter =
-                new DrinksListAdapter(this, drinks);
+                drinksListRecyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.LayoutManager layoutManager =
-                new GridLayoutManager(getActivity(), 1);
-
-        drinksListRecyclerView.setLayoutManager(layoutManager);
-
-        drinksListRecyclerView.setAdapter(drinksListAdapter);
+                drinksListRecyclerView.setAdapter(drinksListAdapter);
+            }
+        });
 
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override

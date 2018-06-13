@@ -1,4 +1,4 @@
-package io.brainyapps.barista;
+package io.brainyapps.barista.ui.drinks;
 
 import io.brainyapps.barista.data.entity.Drink;
 

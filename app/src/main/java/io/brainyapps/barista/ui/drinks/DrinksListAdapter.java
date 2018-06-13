@@ -1,4 +1,4 @@
-package io.brainyapps.barista;
+package io.brainyapps.barista.ui.drinks;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.brainyapps.barista.R;
 import io.brainyapps.barista.data.entity.Drink;
 
 public class DrinksListAdapter extends

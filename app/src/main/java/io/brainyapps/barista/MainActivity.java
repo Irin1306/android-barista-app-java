@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
 
+import io.brainyapps.barista.ui.drinks.DrinksFragment;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity

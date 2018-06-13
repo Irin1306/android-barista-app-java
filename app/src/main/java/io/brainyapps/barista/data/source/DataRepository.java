@@ -1,5 +1,9 @@
 package io.brainyapps.barista.data.source;
 
+import java.util.List;
+
+import io.brainyapps.barista.data.entity.Drink;
+
 public class DataRepository implements DataSource {
 
     private static DataRepository INSTANCE = null;
@@ -21,5 +25,15 @@ public class DataRepository implements DataSource {
         }
 
         return INSTANCE;
+    }
+
+    @Override
+    public void getAllDrinks(final GetDrinksCallback callback) {
+        mLocal.getAllDrinks(new GetDrinksCallback() {
+            @Override
+            public void onDrinksLoaded(List<Drink> drinks) {
+                callback.onDrinksLoaded(drinks);
+            }
+        });
     }
 }
