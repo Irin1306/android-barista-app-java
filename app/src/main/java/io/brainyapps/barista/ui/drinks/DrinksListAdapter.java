@@ -3,7 +3,6 @@ package io.brainyapps.barista.ui.drinks;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,20 +71,8 @@ public class DrinksListAdapter extends
 
     @Override
     public void addFirstElement(Drink drink) {
-        //mDrinks.add(0, drink);
-        //notifyItemInserted(2);
-        boolean fuckingCycle = true;
-        long z = 0;
-
-        for (int i = 0; i < 100; i++) {
-            i = 0;
-            z++;
-            Log.i("tttttqweqweqwe", "z = " + z);
-            Drink drink1 = new Drink();
-            drink1.setName("qweqwe");
-            mDrinks.add(2, drink1);
-            notifyItemInserted(2);
-        }
+        mDrinks.add(0, drink);
+        notifyItemInserted(0);
     }
 
     // ViewHolder
