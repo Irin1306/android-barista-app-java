@@ -26,6 +26,14 @@ public class AppExecutors {
         );
     }
 
+    public Executor diskIO() {
+        return diskIO;
+    }
+
+    public Executor mainThread() {
+        return mainThread;
+    }
+
     private static class MainThreadExecutor implements Executor {
         private Handler mainTheadHandler =
                 new Handler(Looper.getMainLooper());
