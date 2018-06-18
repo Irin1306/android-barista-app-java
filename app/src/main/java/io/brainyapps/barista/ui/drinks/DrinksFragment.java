@@ -31,6 +31,10 @@ public class DrinksFragment extends Fragment
 
     private DrinksListContract.View mView = this;
 
+    private List<Drink> mDrinks;
+
+    private DataRepository mData;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,12 +48,13 @@ public class DrinksFragment extends Fragment
         addFab = view.findViewById(R.id.addFab);
         deleteFab = view.findViewById(R.id.fabDelete);
 
-        DataRepository repository = AppDataInjector
+        mData = AppDataInjector
                 .provideDataRepository(getContext());
 
-        repository.getAllDrinks(new DataSource.GetDrinksCallback() {
+        mData.getAllDrinks(new DataSource.GetDrinksCallback() {
             @Override
             public void onDrinksLoaded(List<Drink> drinks) {
+                mDrinks = drinks;
                 DrinksListAdapter drinksListAdapter =
                         new DrinksListAdapter(mView, drinks);
 
@@ -65,16 +70,31 @@ public class DrinksFragment extends Fragment
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drink drink = new Drink();
-                drink.setName("Drink from fragment");
+                final Drink drink = new Drink("Drink " + (mDrinks.size() + 1));
 
-                mAdapter.addFirstElement(drink);
+                mData.saveDring(drink, new DataSource.SaveCallback() {
+                    @Override
+                    public void onSaved() {
+                        mAdapter.addFirstElement(drink);
+                    }
+                });
             }
         });
         deleteFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.deleteLastElement();
+                if (mDrinks.size() == 0) {
+                    return;
+                }
+
+                Drink drink = mDrinks.get(mDrinks.size() - 1);
+
+                mData.deleteDrink(drink, new DataSource.DeleteCallback() {
+                    @Override
+                    public void onDeleted() {
+                        mAdapter.deleteLastElement();
+                    }
+                });
             }
         });
 

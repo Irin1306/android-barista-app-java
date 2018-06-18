@@ -1,8 +1,5 @@
 package io.brainyapps.barista.data.source.local;
 
-import android.util.Log;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import io.brainyapps.barista.data.entity.Drink;
@@ -50,17 +47,8 @@ public class AppLocalDataSource implements DataSource {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                final List<Drink> drinks = new ArrayList<>();
-
-                for (int i = 0; i < 100000; i++) {
-                    Drink drink = new Drink();
-                    drink.setId(i);
-                    drink.setName("Name " + i);
-
-                    drinks.add(drink);
-
-                    Log.i(TAG, "Iteration = " + i);
-                }
+                final List<Drink> drinks =
+                        mDrinkDao.getAllDrinks();
 
                 mExecutors.mainThread().execute(new Runnable() {
                     @Override
@@ -71,6 +59,40 @@ public class AppLocalDataSource implements DataSource {
             }
         };
 
+        mExecutors.diskIO().execute(runnable);
+    }
+
+    @Override
+    public void saveDring(final Drink drink, final SaveCallback callback) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                mDrinkDao.saveDrink(drink);
+                mExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onSaved();
+                    }
+                });
+            }
+        };
+        mExecutors.diskIO().execute(runnable);
+    }
+
+    @Override
+    public void deleteDrink(final Drink drink, final DeleteCallback callback) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                mDrinkDao.deleteDrink(drink);
+                mExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onDeleted();
+                    }
+                });
+            }
+        };
         mExecutors.diskIO().execute(runnable);
     }
 }
