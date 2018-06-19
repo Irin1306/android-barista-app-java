@@ -87,14 +87,9 @@ public class DrinksListAdapter extends
             idTextView = itemView.findViewById(R.id.idTextView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
 
-            mainCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mView.showToast(
-                            mDrinks.get(getAdapterPosition())
-                    );
-                }
-            });
+            mainCardView.setOnClickListener(e-> mView.showToast(
+                    mDrinks.get(getAdapterPosition())
+            ));
         }
 
         @Override

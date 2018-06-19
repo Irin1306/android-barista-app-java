@@ -29,31 +29,17 @@ public class DataRepository implements DataSource {
 
     @Override
     public void getAllDrinks(final GetDrinksCallback callback) {
-        mLocal.getAllDrinks(new GetDrinksCallback() {
-            @Override
-            public void onDrinksLoaded(List<Drink> drinks) {
-                callback.onDrinksLoaded(drinks);
-            }
-        });
+        mLocal.getAllDrinks( callback::onDrinksLoaded);
     }
 
     @Override
-    public void saveDring(Drink drink, final SaveCallback callback) {
-        mLocal.saveDring(drink, new SaveCallback() {
-            @Override
-            public void onSaved() {
-                callback.onSaved();
-            }
-        });
+    public void saveDrink(Drink drink, final SaveCallback callback) {
+        mLocal.saveDrink(drink,  callback::onSaved);
     }
 
     @Override
     public void deleteDrink(Drink drink, final DeleteCallback callback) {
-        mLocal.deleteDrink(drink, new DeleteCallback() {
-            @Override
-            public void onDeleted() {
-                callback.onDeleted();
-            }
-        });
+        mLocal.deleteDrink(drink, callback::onDeleted);
+
     }
 }

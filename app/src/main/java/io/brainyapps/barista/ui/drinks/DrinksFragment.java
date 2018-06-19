@@ -51,51 +51,33 @@ public class DrinksFragment extends Fragment
         mData = AppDataInjector
                 .provideDataRepository(getContext());
 
-        mData.getAllDrinks(new DataSource.GetDrinksCallback() {
-            @Override
-            public void onDrinksLoaded(List<Drink> drinks) {
-                mDrinks = drinks;
-                DrinksListAdapter drinksListAdapter =
-                        new DrinksListAdapter(mView, drinks);
+        mData.getAllDrinks(drinks -> {
+            mDrinks = drinks;
+            DrinksListAdapter drinksListAdapter =
+                    new DrinksListAdapter(mView, drinks);
 
-                RecyclerView.LayoutManager layoutManager =
-                        new GridLayoutManager(getActivity(), 1);
+            RecyclerView.LayoutManager layoutManager =
+                    new GridLayoutManager(getActivity(), 1);
 
-                drinksListRecyclerView.setLayoutManager(layoutManager);
+            drinksListRecyclerView.setLayoutManager(layoutManager);
 
-                drinksListRecyclerView.setAdapter(drinksListAdapter);
-            }
+            drinksListRecyclerView.setAdapter(drinksListAdapter);
         });
 
-        addFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        addFab.setOnClickListener(v ->{
                 final Drink drink = new Drink("Drink " + (mDrinks.size() + 1));
 
-                mData.saveDring(drink, new DataSource.SaveCallback() {
-                    @Override
-                    public void onSaved() {
-                        mAdapter.addFirstElement(drink);
-                    }
-                });
-            }
+                mData.saveDrink(drink, () -> mAdapter.addFirstElement(drink));
+
         });
-        deleteFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mDrinks.size() == 0) {
-                    return;
-                }
-
-                Drink drink = mDrinks.get(mDrinks.size() - 1);
-
-                mData.deleteDrink(drink, new DataSource.DeleteCallback() {
-                    @Override
-                    public void onDeleted() {
-                        mAdapter.deleteLastElement();
-                    }
-                });
+        deleteFab.setOnClickListener(v -> {
+            if (mDrinks.size() == 0) {
+                return;
             }
+
+            Drink drink = mDrinks.get(mDrinks.size() - 1);
+
+            mData.deleteDrink(drink, ()-> mAdapter.deleteLastElement());
         });
 
         return view;
