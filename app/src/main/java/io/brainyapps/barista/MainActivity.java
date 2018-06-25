@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.crashlytics.android.Crashlytics;
 
 import io.brainyapps.barista.ui.drinks.DrinksFragment;
+import io.brainyapps.barista.util.ActivityUtils;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
@@ -82,10 +83,13 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_drink_list) {
 
-            getSupportFragmentManager().beginTransaction()
+            ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
+                    getSupportFragmentManager(), new DrinksFragment());
+
+           /* getSupportFragmentManager().beginTransaction()
                     .replace(R.id.mainContainer,
                             new DrinksFragment())
-                    .commitAllowingStateLoss();
+                    .commitAllowingStateLoss();*/
 
         } else if (id == R.id.nav_slideshow) {
 
