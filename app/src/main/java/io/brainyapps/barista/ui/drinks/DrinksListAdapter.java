@@ -1,18 +1,13 @@
 package io.brainyapps.barista.ui.drinks;
 
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 
-import android.support.transition.TransitionManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -20,7 +15,6 @@ import java.util.List;
 
 import io.brainyapps.barista.R;
 import io.brainyapps.barista.data.entity.Drink;
-import io.brainyapps.barista.util.ResizeAnimation;
 
 
 public class DrinksListAdapter extends
@@ -62,7 +56,6 @@ public class DrinksListAdapter extends
         holder.nameTextView.setText(mDrinks.get(position).getName());
 
 
-
     }
 
     @Override
@@ -96,8 +89,6 @@ public class DrinksListAdapter extends
         ImageView imageViewBig;
 
 
-
-
         public ViewHolder(View itemView) {
             super(itemView);
             mainCardView = itemView.findViewById(R.id.mainCardView);
@@ -105,73 +96,45 @@ public class DrinksListAdapter extends
             nameTextView = itemView.findViewById(R.id.nameTextView);
             imageViewBig = itemView.findViewById(R.id.appCompatImageViewBig);
 
-            mainCardView.setOnClickListener(e-> mView.showToast(
-                    mDrinks.get(getAdapterPosition())
-            ));
 
-            // ViewParent parent = imageViewBig.getParent();
-            //Log.i("kkk", "getParent: " + imageViewBig.getParent());
-
-            imageViewBig.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-            int height = imageViewBig.getMeasuredHeight();//175
-            int width = imageViewBig.getMeasuredWidth();//365
-            Log.i("kkk", "imageViewBig.getMeasuredHeight: " + height + "imageViewBig.getMeasuredWidth: " + width);
-            //imageViewBig.setLayoutParams(new LinearLayout.LayoutParams(width, height));
-
-
-            imageViewBig.setOnClickListener(v -> {
-
-               ViewGroup.LayoutParams params =
-                       imageViewBig.getLayoutParams();
-               ViewGroup.MarginLayoutParams margParams =
-                        (ViewGroup.MarginLayoutParams) imageViewBig.getLayoutParams();
-
-
-               Log.i("kkk", "height: " + params.height + "width: " + params.width);
-               Boolean expanded = false;//156, 276
-               if (params.width > 276) {
-                   expanded = true;
-               };
-                Log.i("kkk", " expanded: " + expanded);
-
-
-                if (expanded){
-                    params.width -= 30;
-                    params.height -= 20;
-                    margParams.setMargins(8,0,8,0);
-                } else {
-                    params.width += 30;
-                    params.height += 20;
-                    margParams.setMargins(-7,-10,-7,-10);
+            mainCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mView.showToast(
+                            mDrinks.get(getAdapterPosition())
+                    );
                 }
-                imageViewBig.setLayoutParams(params);
-
-
-                /*imageView.setScaleType(expanded ? ImageView.ScaleType.CENTER_CROP :
-                    ImageView.ScaleType.CENTER_CROP);
-
-                */
-                /*ResizeAnimation resizeAnimation = new ResizeAnimation(v, params.width);
-                resizeAnimation.setDuration(600);
-                v.startAnimation(resizeAnimation);*/
-
-
-               /* ViewGroup.LayoutParams params = imageViewBig.getLayoutParams();
-                int newWidth = params.width + 30;
-                int newHeight = params.height + 30;
-                params.height = newHeight;
-                params.width = newWidth;
-                imageViewBig.setLayoutParams(params);
-                ViewGroup.MarginLayoutParams prs = (ViewGroup.MarginLayoutParams) imageViewBig.getLayoutParams();
-                prs.setMargins(-15,-15,-15,-15);
-*/
-                //expanded ? ViewGroup.LayoutParams.MATCH_PARENT :
-                        //ViewGroup.LayoutParams.WRAP_CONTENT;
-
-
-               /* imageViewBig.setScaleType(expanded ? ImageView.ScaleType.CENTER_CROP :
-                        ImageView.ScaleType.FIT_CENTER);*/
             });
+
+            imageViewBig.setOnClickListener(new View.OnClickListener() {
+
+                //change size
+                @Override
+                public void onClick(View v) {
+                    ViewGroup.LayoutParams params =
+                            imageViewBig.getLayoutParams();
+                    ViewGroup.MarginLayoutParams margParams =
+                            (ViewGroup.MarginLayoutParams) imageViewBig.getLayoutParams();
+
+                    Boolean expanded = false;
+                    if (params.width > 276) {
+                        expanded = true;
+                    }
+                    ;
+                    if (expanded) {
+                        params.width -= 30;
+                        params.height -= 20;
+                        margParams.setMargins(8, 0, 8, 0);
+                    } else {
+                        params.width += 30;
+                        params.height += 20;
+                        margParams.setMargins(-7, -10, -7, -10);
+                    }
+                    imageViewBig.setLayoutParams(params);
+
+                }
+            });
+
         }
 
 

@@ -44,13 +44,19 @@ public class AppLocalDataSource implements DataSource {
     @Override
     public void getAllDrinks(final GetDrinksCallback callback) {
 
-        Runnable runnable = ()->{
-
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
                 final List<Drink> drinks =
                         mDrinkDao.getAllDrinks();
 
-                mExecutors.mainThread().execute(() -> callback.onDrinksLoaded(drinks));
-
+                mExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onDrinksLoaded(drinks);
+                    }
+                });
+            }
         };
 
         mExecutors.diskIO().execute(runnable);
@@ -58,21 +64,34 @@ public class AppLocalDataSource implements DataSource {
 
     @Override
     public void saveDrink(final Drink drink, final SaveCallback callback) {
-        Runnable runnable =  ()->{
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
                 mDrinkDao.saveDrink(drink);
-                mExecutors.mainThread().execute(callback::onSaved);
-
+                mExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onSaved();
+                    }
+                });
+            }
         };
         mExecutors.diskIO().execute(runnable);
     }
 
     @Override
     public void deleteDrink(final Drink drink, final DeleteCallback callback) {
-        Runnable runnable =  ()->{
-
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
                 mDrinkDao.deleteDrink(drink);
-                mExecutors.mainThread().execute(callback::onDeleted);
-
+                mExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onDeleted();
+                    }
+                });
+            }
         };
         mExecutors.diskIO().execute(runnable);
     }

@@ -86,10 +86,6 @@ public class MainActivity extends AppCompatActivity
             ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
                     getSupportFragmentManager(), new DrinksFragment());
 
-           /* getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mainContainer,
-                            new DrinksFragment())
-                    .commitAllowingStateLoss();*/
 
         } else if (id == R.id.nav_slideshow) {
 

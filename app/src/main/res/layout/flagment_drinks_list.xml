@@ -23,22 +23,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:scrollbarStyle="outsideInset"
             android:scrollbars="horizontal"
             android:scrollIndicators="none"/>
 
     </ScrollView>
 
-   <!-- <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/appCompatImageViewSuper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/primaryDark"
-        android:clickable="true"
-        android:focusable="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="w,16:9"
-        app:srcCompat="@drawable/espresso" />-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addFab"
