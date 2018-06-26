@@ -38,8 +38,8 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void saveDring(Drink drink, final SaveCallback callback) {
-        mLocal.saveDring(drink, new SaveCallback() {
+    public void saveDrink(Drink drink, final SaveCallback callback) {
+        mLocal.saveDrink(drink, new SaveCallback() {
             @Override
             public void onSaved() {
                 callback.onSaved();

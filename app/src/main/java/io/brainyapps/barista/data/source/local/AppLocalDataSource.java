@@ -63,7 +63,7 @@ public class AppLocalDataSource implements DataSource {
     }
 
     @Override
-    public void saveDring(final Drink drink, final SaveCallback callback) {
+    public void saveDrink(final Drink drink, final SaveCallback callback) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {

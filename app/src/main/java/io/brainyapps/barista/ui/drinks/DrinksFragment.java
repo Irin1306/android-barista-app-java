@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -20,8 +21,11 @@ import io.brainyapps.barista.data.entity.Drink;
 import io.brainyapps.barista.data.source.DataRepository;
 import io.brainyapps.barista.data.source.DataSource;
 
+
 public class DrinksFragment extends Fragment
         implements DrinksListContract.View {
+    ;
+
 
     private DrinksListContract.Adapter mAdapter;
 
@@ -48,6 +52,7 @@ public class DrinksFragment extends Fragment
         addFab = view.findViewById(R.id.addFab);
         deleteFab = view.findViewById(R.id.fabDelete);
 
+
         mData = AppDataInjector
                 .provideDataRepository(getContext());
 
@@ -58,10 +63,9 @@ public class DrinksFragment extends Fragment
                 DrinksListAdapter drinksListAdapter =
                         new DrinksListAdapter(mView, drinks);
 
-                RecyclerView.LayoutManager layoutManager =
-                        new GridLayoutManager(getActivity(), 1);
-
-                drinksListRecyclerView.setLayoutManager(layoutManager);
+                GridLayoutManager gridHorizontal =
+                        new GridLayoutManager(getActivity(), 2, GridLayoutManager.HORIZONTAL, false);
+                drinksListRecyclerView.setLayoutManager(gridHorizontal);
 
                 drinksListRecyclerView.setAdapter(drinksListAdapter);
             }
@@ -70,9 +74,9 @@ public class DrinksFragment extends Fragment
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Drink drink = new Drink("Drink " + (mDrinks.size() + 1));
+                final Drink drink = new Drink("Espresso");//("Drink " + (mDrinks.size() + 1));
 
-                mData.saveDring(drink, new DataSource.SaveCallback() {
+                mData.saveDrink(drink, new DataSource.SaveCallback() {
                     @Override
                     public void onSaved() {
                         mAdapter.addFirstElement(drink);
@@ -80,6 +84,7 @@ public class DrinksFragment extends Fragment
                 });
             }
         });
+
         deleteFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +102,7 @@ public class DrinksFragment extends Fragment
                 });
             }
         });
+
 
         return view;
     }

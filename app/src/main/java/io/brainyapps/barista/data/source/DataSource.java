@@ -8,7 +8,7 @@ public interface DataSource {
 
     void getAllDrinks(GetDrinksCallback callback);
 
-    void saveDring(Drink drink, SaveCallback callback);
+    void saveDrink(Drink drink, SaveCallback callback);
 
     void deleteDrink(Drink drink, DeleteCallback callback);
 

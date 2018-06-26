@@ -1,17 +1,21 @@
 package io.brainyapps.barista.ui.drinks;
 
 import android.support.annotation.NonNull;
+
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
+
 import io.brainyapps.barista.R;
 import io.brainyapps.barista.data.entity.Drink;
+
 
 public class DrinksListAdapter extends
         RecyclerView.Adapter<DrinksListAdapter.ViewHolder>
@@ -50,6 +54,8 @@ public class DrinksListAdapter extends
                 String.valueOf(mDrinks.get(position).getId())
         );
         holder.nameTextView.setText(mDrinks.get(position).getName());
+
+
     }
 
     @Override
@@ -80,12 +86,16 @@ public class DrinksListAdapter extends
         CardView mainCardView;
         TextView idTextView;
         TextView nameTextView;
+        ImageView imageViewBig;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             mainCardView = itemView.findViewById(R.id.mainCardView);
             idTextView = itemView.findViewById(R.id.idTextView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
+            imageViewBig = itemView.findViewById(R.id.appCompatImageViewBig);
+
 
             mainCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,7 +105,38 @@ public class DrinksListAdapter extends
                     );
                 }
             });
+
+            imageViewBig.setOnClickListener(new View.OnClickListener() {
+
+                //change size
+                @Override
+                public void onClick(View v) {
+                    ViewGroup.LayoutParams params =
+                            imageViewBig.getLayoutParams();
+                    ViewGroup.MarginLayoutParams margParams =
+                            (ViewGroup.MarginLayoutParams) imageViewBig.getLayoutParams();
+
+                    Boolean expanded = false;
+                    if (params.width > 276) {
+                        expanded = true;
+                    }
+                    ;
+                    if (expanded) {
+                        params.width -= 30;
+                        params.height -= 20;
+                        margParams.setMargins(8, 0, 8, 0);
+                    } else {
+                        params.width += 30;
+                        params.height += 20;
+                        margParams.setMargins(-7, -10, -7, -10);
+                    }
+                    imageViewBig.setLayoutParams(params);
+
+                }
+            });
+
         }
+
 
         @Override
         public void onClick(View v) {
