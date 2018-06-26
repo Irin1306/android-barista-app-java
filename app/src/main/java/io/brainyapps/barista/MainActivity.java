@@ -84,8 +84,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_drink_list) {
 
             ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
-                    getSupportFragmentManager(), new DrinksFragment());
-
+ 
+                    getSupportFragmentManager(),
+                    new DrinksFragment());
+ 
 
         } else if (id == R.id.nav_slideshow) {
 
