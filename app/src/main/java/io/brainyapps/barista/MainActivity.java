@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.crashlytics.android.Crashlytics;
 
 import io.brainyapps.barista.ui.drinks.DrinksFragment;
+import io.brainyapps.barista.ui.hits.HitsFragment;
 import io.brainyapps.barista.util.ActivityUtils;
 import io.fabric.sdk.android.Fabric;
 
@@ -38,6 +39,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            MenuItem menuItem = navigationView.getMenu().getItem(0);
+
+            onNavigationItemSelected(menuItem);
+
+            menuItem.setChecked(true);
+        }
     }
 
     @Override
@@ -79,24 +88,27 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_hits) {
+
+            ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
+
+                    getSupportFragmentManager(),
+                    new HitsFragment());
+
         } else if (id == R.id.nav_drink_list) {
 
             ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
  
                     getSupportFragmentManager(),
                     new DrinksFragment());
- 
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_history) {
+            //
+        } else if (id == R.id.nav_cart) {
+            //
+        } else if (id == R.id.nav_settings) {
+            //
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
