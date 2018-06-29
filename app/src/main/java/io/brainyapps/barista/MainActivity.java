@@ -40,13 +40,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (savedInstanceState == null){
-            MenuItem menuItem = navigationView
-                    .getMenu().getItem(0);
+
+        if (savedInstanceState == null) {
+            MenuItem menuItem = navigationView.getMenu().getItem(0);
+
+            onNavigationItemSelected(menuItem);
 
             menuItem.setChecked(true);
 
-            onNavigationItemSelected(menuItem);
         }
     }
 
@@ -93,21 +94,20 @@ public class MainActivity extends AppCompatActivity
 
             ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
                     getSupportFragmentManager(), new HitsFragment());
+
         } else if (id == R.id.nav_drink_list) {
 
             ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
-                    getSupportFragmentManager(), new DrinksFragment());
-
-           /* getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mainContainer,
-                            new DrinksFragment())
-                    .commitAllowingStateLoss();*/
+ 
+                    getSupportFragmentManager(),
+                    new DrinksFragment());
 
         } else if (id == R.id.nav_history) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
+            //
+        } else if (id == R.id.nav_cart) {
+            //
+        } else if (id == R.id.nav_settings) {
+            //
 
         }
 

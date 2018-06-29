@@ -1,12 +1,24 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppThemeOld" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryOld</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkOld</item>
-        <item name="colorAccent">@color/colorAccentOld</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorControlHighlight">@color/accent</item>
+        <!-- <item name="colorControlActivated">@color/activated</item>
+        <item name="android:navigationBarColor">@color/primaryDark</item>
+        <item name="android:statusBarColor">@color/primaryDark</item>-->
+        <item name="android:textColorPrimary">@color/accent</item>
+        <item name="android:textColorSecondary">@color/primaryDark</item>
+        <item name="android:textColorPrimaryInverse">@color/highlight</item>
+        <item name="actionMenuTextColor">@color/accent</item>
     </style>
+
+    <style name="Light" parent="Theme.AppCompat.Light" />
+
+    <style name="Dark" parent="Theme.AppCompat" />
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -14,69 +26,19 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-       <!-- <item name="android:textColorSecondary">@color/colorAccent</item>-->
+        <!-- <item name="android:textColorSecondary">@color/colorAccent</item>-->
         <item name="android:textColorPrimary">@color/accent</item>
     </style>
 
-    <style name="ThemeOverlay.AccentSecondary" parent="ThemeOverlay.AppCompat">
-        <item name="colorAccent">@color/colorActivated</item>
-        <item name="android:textColorPrimary">@color/accent</item>
-    </style>
-
+    <!-- <style name="ThemeOverlay.AccentSecondary" parent="ThemeOverlay.AppCompat">
+         <item name="colorAccent">@color/colorActivated</item>
+         <item name="android:textColorPrimary">@color/accent</item>
+     </style>-->
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColorPrimary">@color/accent</item>
-       <!-- <item name="android:textColorSecondary">@color/colorAccent</item>-->
+        <!-- <item name="android:textColorSecondary">@color/colorAccent</item>-->
     </style>
-
-
-    <!-- My application theme. -->
-    <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorPrimary</item>
-        <item name="colorControlHighlight">@color/colorAccent</item>
-        <item name="colorControlActivated">@color/colorActivated</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-        <item name="android:textColorPrimary">@color/colorPrimary</item>
-        <item name="android:textColorSecondary">@color/colorAccent</item>
-        <item name="android:textColorPrimaryInverse">@color/colorHighlight</item>
-        <item name="actionMenuTextColor">@color/colorPrimary</item>
-
-    </style>
-
-
-
-    <style name="Light" parent="Theme.AppCompat.Light" />
-
-    <style name="Dark" parent="Theme.AppCompat" />
-
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primaryDark</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="colorControlHighlight">@color/accent</item>
-        <item name="colorControlActivated">@color/colorActivated</item>
-        <item name="android:navigationBarColor">@color/primaryDark</item>
-        <item name="android:statusBarColor">@color/primaryDark</item>
-        <item name="android:textColorPrimary">@color/accent</item>
-        <item name="android:textColorSecondary">@color/primaryDark</item>
-        <item name="android:textColorPrimaryInverse">@color/highlight</item>
-        <item name="actionMenuTextColor">@color/accent</item>
-
-    </style>
-
-   <!-- <style name="Widget.Shrine.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">?attr/colorAccent</item>
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-    </style>-->
 
 
 </resources>
