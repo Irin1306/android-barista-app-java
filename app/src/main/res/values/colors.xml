@@ -16,6 +16,6 @@
     <color name="primaryDark">#A1887F</color>
     <color name="accent">#3E2723</color>
     <color name="highlight">#EFEBE9</color>
-
+    <color name="colorStar">#FFC400</color>
 
 </resources>

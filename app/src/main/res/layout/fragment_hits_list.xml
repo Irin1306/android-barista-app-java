@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/drinksListRecyclerView"
+            android:id="@+id/hitsListRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
@@ -24,6 +25,8 @@
             android:layout_marginRight="0dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
+            android:background="@color/colorStar"
+            android:paddingVertical="15dp"
             android:scrollIndicators="none"
             android:scrollbarStyle="outsideInset"
             android:scrollbars="horizontal"
@@ -34,16 +37,16 @@
 
     </ScrollView>
 
-   <!-- <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/appCompatImageViewSuper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/primaryDark"
-        android:clickable="true"
-        android:focusable="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="w,16:9"
-        app:srcCompat="@drawable/espresso" />-->
+    <!-- <android.support.v7.widget.AppCompatImageView
+         android:id="@+id/appCompatImageViewSuper"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:background="@color/primaryDark"
+         android:clickable="true"
+         android:focusable="true"
+         android:scaleType="centerCrop"
+         app:layout_constraintDimensionRatio="w,16:9"
+         app:srcCompat="@drawable/espresso" />-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addFab"
@@ -75,7 +78,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-
         app:srcCompat="@drawable/ic_delete_forever_black_24dp" />
 
 </android.support.constraint.ConstraintLayout>
