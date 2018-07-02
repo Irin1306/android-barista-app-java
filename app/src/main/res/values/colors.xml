@@ -7,7 +7,8 @@
     <color name="highlight">#EFEBE9</color>
 
     <color name="colorStar">#FFC400</color>
-
+    <color name="colorReady">#00E676</color>
+    <color name="colorDelete">#EF9A9A</color>
    <!--<color name="activated">#caeeff</color>-->
 
 

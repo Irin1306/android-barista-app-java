@@ -14,11 +14,11 @@
             android:title="Drinks" />
         <item
             android:id="@+id/nav_history"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_history_black_24dp"
             android:title="History" />
         <item
             android:id="@+id/nav_cart"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:title="Cart" />
     </group>
 

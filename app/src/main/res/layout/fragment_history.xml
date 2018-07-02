@@ -6,36 +6,21 @@
     android:layout_height="match_parent"
     android:background="@color/highlight">
 
-    <ScrollView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/historyListRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollIndicators="none"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/hitsListRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:background="@color/colorStar"
-            android:paddingVertical="15dp"
-            android:scrollIndicators="none"
-            android:scrollbarStyle="outsideInset"
-            android:scrollbars="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-    </ScrollView>
 
     <!-- <android.support.v7.widget.AppCompatImageView
          android:id="@+id/appCompatImageViewSuper"

@@ -1,4 +1,4 @@
-package io.brainyapps.barista.ui.hits;
+package io.brainyapps.barista.ui.history;
 
 import android.content.Context;
 
@@ -10,15 +10,18 @@ import io.brainyapps.barista.data.source.DataRepository;
 import io.brainyapps.barista.data.source.DataSource;
 
 
-public class HitsPresenter implements HitsContract.Presenter {
 
-    private HitsContract.View mView;
+public class HistoryPresenter implements HistoryContract.Presenter {
 
-    private HitsContract.Adapter mAdapter;
+    private HistoryContract.View mView;
+
+    private HistoryContract.Adapter mAdapter;
 
     private DataRepository mData;
 
-    public HitsPresenter(HitsContract.View view, Context context) {
+    private List<Drink> mDrinks;
+
+    public HistoryPresenter(HistoryContract.View view, Context context) {
         mView = view;
         mView.setPresenter(this);
         mData = AppDataInjector.provideDataRepository(context);
@@ -31,7 +34,7 @@ public class HitsPresenter implements HitsContract.Presenter {
     }
 
     @Override
-    public void setAdapter(HitsContract.Adapter adapter) {
+    public void setAdapter(HistoryContract.Adapter adapter) {
         mAdapter = adapter;
     }
 
@@ -40,9 +43,24 @@ public class HitsPresenter implements HitsContract.Presenter {
         mData.getAllDrinks(new DataSource.GetDrinksCallback() {
             @Override
             public void onDrinksLoaded(List<Drink> drinks) {
-                mView.setDrinks(drinks);
+                if (drinks.size() <= 5) {
+
+                    mView.setDrinks(drinks);
+
+                }
+                else {
+
+                    mDrinks = drinks.subList((drinks.size() - 6), (drinks.size() - 1));
+                    mView.setDrinks(mDrinks);
+                }
+
             }
         });
+    }
+
+    @Override
+    public void deleteHistory() {
+        //
     }
 
 

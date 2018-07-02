@@ -145,6 +145,7 @@ public class DrinksListAdapter extends
         CardView mainCardView;
         TextView idTextView;
         TextView nameTextView;
+        TextView priceTextView;
         ImageView imageViewBig;
 
 
@@ -153,6 +154,7 @@ public class DrinksListAdapter extends
             mainCardView = itemView.findViewById(R.id.mainCardView);
             idTextView = itemView.findViewById(R.id.idTextView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
+            priceTextView = itemView.findViewById(R.id.priceTextView);
             imageViewBig = itemView.findViewById(R.id.appCompatImageViewBig);
         }
 

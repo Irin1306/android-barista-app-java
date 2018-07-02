@@ -1,13 +1,11 @@
-package io.brainyapps.barista.ui.hits;
+package io.brainyapps.barista.ui.history;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -16,19 +14,20 @@ import io.brainyapps.barista.R;
 import io.brainyapps.barista.data.entity.Drink;
 
 
-public class HitsAdapter extends
-        RecyclerView.Adapter<io.brainyapps.barista.ui.hits.HitsAdapter.ViewHolder>
-        implements HitsContract.Adapter {
 
-    private HitsContract.View mView;
-    private HitsContract.Presenter mPresenter;
+public class HistoryAdapter extends
+        RecyclerView.Adapter<io.brainyapps.barista.ui.history.HistoryAdapter.ViewHolder>
+        implements HistoryContract.Adapter {
+
+    private HistoryContract.View mView;
+    private HistoryContract.Presenter mPresenter;
 
     private List<Drink> mDrinks;
 
 
-    public HitsAdapter(HitsContract.View view,
-                       HitsContract.Presenter presenter,
-                             List<Drink> drinks) {
+    public HistoryAdapter(HistoryContract.View view,
+                          HistoryContract.Presenter presenter,
+                       List<Drink> drinks) {
         mView = view;
         mPresenter = presenter;
         mDrinks = drinks;
@@ -39,20 +38,20 @@ public class HitsAdapter extends
 
     @NonNull
     @Override
-    public io.brainyapps.barista.ui.hits.HitsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                                                           int viewType) {
+    public io.brainyapps.barista.ui.history.HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                                                   int viewType) {
 
         View itemLayoutView = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.hits_list_row,
+                .inflate(R.layout.history_list_row,
                         parent,
                         false);
 
-        return new io.brainyapps.barista.ui.hits.HitsAdapter.ViewHolder(itemLayoutView);
+        return new io.brainyapps.barista.ui.history.HistoryAdapter.ViewHolder(itemLayoutView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull io.brainyapps.barista.ui.hits.HitsAdapter.ViewHolder holder,
+    public void onBindViewHolder(@NonNull io.brainyapps.barista.ui.history.HistoryAdapter.ViewHolder holder,
                                  int position) {
         holder.idTextView.setText(
                 String.valueOf(mDrinks.get(position).getId())
@@ -62,20 +61,12 @@ public class HitsAdapter extends
         holder.mainCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //
+                //
             }
         });
 
 
-        holder.imageViewBig.setOnClickListener(new View.OnClickListener() {
 
-            //change size
-            @Override
-            public void onClick(View v) {
-
-               //
-            }
-        });
 
     }
 
@@ -92,16 +83,17 @@ public class HitsAdapter extends
         TextView idTextView;
         TextView nameTextView;
         TextView priceTextView;
-        ImageView imageViewBig;
-
+        TextView orderTextView;
+        TextView statusTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mainCardView = itemView.findViewById(R.id.mainCardView);
             idTextView = itemView.findViewById(R.id.idTextView);
+            orderTextView = itemView.findViewById(R.id.ordTextView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             priceTextView = itemView.findViewById(R.id.priceTextView);
-            imageViewBig = itemView.findViewById(R.id.appCompatImageViewBig);
+            statusTextView = itemView.findViewById(R.id.statusTextView);
         }
 
 

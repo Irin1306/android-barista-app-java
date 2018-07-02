@@ -1,4 +1,4 @@
-package io.brainyapps.barista.ui.hits;
+package io.brainyapps.barista.ui.cart;
 
 import android.content.Context;
 
@@ -8,17 +8,18 @@ import io.brainyapps.barista.data.AppDataInjector;
 import io.brainyapps.barista.data.entity.Drink;
 import io.brainyapps.barista.data.source.DataRepository;
 import io.brainyapps.barista.data.source.DataSource;
+import io.brainyapps.barista.ui.history.HistoryContract;
 
 
-public class HitsPresenter implements HitsContract.Presenter {
+public class CartPresenter implements CartContract.Presenter {
 
-    private HitsContract.View mView;
+    private CartContract.View mView;
 
-    private HitsContract.Adapter mAdapter;
+    private CartContract.Adapter mAdapter;
 
     private DataRepository mData;
 
-    public HitsPresenter(HitsContract.View view, Context context) {
+    public CartPresenter(CartContract.View view, Context context) {
         mView = view;
         mView.setPresenter(this);
         mData = AppDataInjector.provideDataRepository(context);
@@ -31,7 +32,7 @@ public class HitsPresenter implements HitsContract.Presenter {
     }
 
     @Override
-    public void setAdapter(HitsContract.Adapter adapter) {
+    public void setAdapter(CartContract.Adapter adapter) {
         mAdapter = adapter;
     }
 
@@ -43,6 +44,16 @@ public class HitsPresenter implements HitsContract.Presenter {
                 mView.setDrinks(drinks);
             }
         });
+    }
+
+    @Override
+    public void addQty(Drink drink) {
+        //
+    }
+
+    @Override
+    public void deleteQty(Drink drink) {
+    //
     }
 
 
