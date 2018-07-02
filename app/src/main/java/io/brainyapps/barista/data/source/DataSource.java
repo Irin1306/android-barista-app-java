@@ -12,6 +12,8 @@ public interface DataSource {
 
     void deleteDrink(Drink drink, DeleteCallback callback);
 
+    void getSearchResults(String string, GetDrinksCallback callback);
+
     interface SaveCallback {
         void onSaved();
     }

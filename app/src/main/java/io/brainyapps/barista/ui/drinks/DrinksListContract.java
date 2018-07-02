@@ -32,5 +32,7 @@ public interface DrinksListContract {
         void deleteDrink(Drink drink);
 
         void saveDrink(Drink drink);
+
+        void makeSearch(String searchString);
     }
 }

@@ -57,4 +57,14 @@ public class DrinksListPresenter implements DrinksListContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void makeSearch(String searchString) {
+        mData.getSearchResults(searchString, new DataSource.GetDrinksCallback() {
+            @Override
+            public void onDrinksLoaded(List<Drink> drinks) {
+                mView.setDrinks(drinks);
+            }
+        });
+    }
 }

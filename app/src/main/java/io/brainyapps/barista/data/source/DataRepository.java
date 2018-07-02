@@ -56,4 +56,14 @@ public class DataRepository implements DataSource {
             }
         });
     }
+
+    @Override
+    public void getSearchResults(String string, final GetDrinksCallback callback) {
+        mLocal.getSearchResults(string, new GetDrinksCallback() {
+            @Override
+            public void onDrinksLoaded(List<Drink> drinks) {
+                callback.onDrinksLoaded(drinks);
+            }
+        });
+    }
 }
