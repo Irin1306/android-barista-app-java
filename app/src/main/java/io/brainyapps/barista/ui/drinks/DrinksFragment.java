@@ -8,7 +8,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -20,7 +24,7 @@ import io.brainyapps.barista.data.entity.Drink;
 
 
 public class DrinksFragment extends Fragment
-        implements DrinksListContract.View {
+        implements DrinksListContract.View, SearchView.OnQueryTextListener {
 
     private DrinksListContract.Presenter mPresenter;
 
@@ -48,6 +52,8 @@ public class DrinksFragment extends Fragment
         View view = inflater.inflate(R.layout.flagment_drinks_list,
                 container, false);
 
+        setHasOptionsMenu(true);
+
         drinksListRecyclerView = view.findViewById
                 (R.id.drinksListRecyclerView);
         addFab = view.findViewById(R.id.addFab);
@@ -65,6 +71,19 @@ public class DrinksFragment extends Fragment
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.menu_search, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+
+    }
+
+    @Override
     public void setPresenter(DrinksListContract.Presenter presenter) {
         mPresenter = presenter;
     }
@@ -79,7 +98,7 @@ public class DrinksFragment extends Fragment
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Drink drink = new Drink("Espresso");//("Drink " + (mDrinks.size() + 1));
+                final Drink drink = new Drink("Espresso" + (mDrinks.size() + 1));//("Drink " + (mDrinks.size() + 1));
 
                 mPresenter.saveDrink(drink);
             }
@@ -116,5 +135,18 @@ public class DrinksFragment extends Fragment
     public void showToast(Drink drink) {
         Toast.makeText(getContext(), drink.getName() + " click",
                 Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        mPresenter.makeSearch(newText);
+
+        return true;
     }
 }
