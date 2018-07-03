@@ -3,6 +3,7 @@ package io.brainyapps.barista.ui.drinks;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,9 @@ public class DrinksListAdapter extends
     private DrinksListContract.Presenter mPresenter;
 
     private List<Drink> mDrinks;
+
+    private Boolean expanded = false;
+
 
     public DrinksListAdapter(DrinksListContract.View view,
                              DrinksListContract.Presenter presenter,
@@ -67,35 +71,33 @@ public class DrinksListAdapter extends
             }
         });
 
+
+
+
         ViewGroup.LayoutParams params =
                 holder.imageViewBig.getLayoutParams();
+        ViewGroup.MarginLayoutParams margParams =
+                (ViewGroup.MarginLayoutParams) holder.imageViewBig.getLayoutParams();
+        int margLeft =  margParams.getMarginStart();
 
-        Toast.makeText(holder.imageViewBig.getContext(),
-                "params = " + params.width,
-                Toast.LENGTH_LONG).show();
 
         holder.imageViewBig.setOnClickListener(new View.OnClickListener() {
 
             //change size
             @Override
             public void onClick(View v) {
-                ViewGroup.LayoutParams params =
-                        holder.imageViewBig.getLayoutParams();
-                ViewGroup.MarginLayoutParams margParams =
-                        (ViewGroup.MarginLayoutParams) holder.imageViewBig.getLayoutParams();
 
-                Boolean expanded = false;
-                if (params.width > 276) {
-                    expanded = true;
-                }
+                expanded = !expanded;
+
                 if (expanded) {
-                    params.width -= 30;
-                    params.height -= 20;
-                    margParams.setMargins(8, 0, 8, 0);
-                } else {
                     params.width += 30;
                     params.height += 20;
-                    margParams.setMargins(-7, -10, -7, -10);
+                    margParams.setMargins(margLeft - 15, -10, margLeft - 15, -10);
+
+                } else {
+                    params.width -= 30;
+                    params.height -= 20;
+                    margParams.setMargins(margLeft + 15, 0, margLeft + 15, 0);
                 }
                 holder.imageViewBig.setLayoutParams(params);
 
@@ -132,6 +134,7 @@ public class DrinksListAdapter extends
         CardView mainCardView;
         TextView idTextView;
         TextView nameTextView;
+        TextView priceTextView;
         ImageView imageViewBig;
 
 
@@ -140,6 +143,7 @@ public class DrinksListAdapter extends
             mainCardView = itemView.findViewById(R.id.mainCardView);
             idTextView = itemView.findViewById(R.id.idTextView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
+            priceTextView = itemView.findViewById(R.id.priceTextView);
             imageViewBig = itemView.findViewById(R.id.appCompatImageViewBig);
         }
 

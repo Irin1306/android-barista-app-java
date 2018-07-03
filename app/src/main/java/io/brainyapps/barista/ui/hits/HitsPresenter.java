@@ -14,4 +14,5 @@ public class HitsPresenter implements HitsContract.Presenter {
     public void start() {
         //
     }
+
 }

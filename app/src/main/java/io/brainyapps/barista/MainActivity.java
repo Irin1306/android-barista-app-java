@@ -13,13 +13,17 @@ import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
 
+import io.brainyapps.barista.ui.cart.CartFragment;
 import io.brainyapps.barista.ui.drinks.DrinksFragment;
+import io.brainyapps.barista.ui.history.HistoryFragment;
 import io.brainyapps.barista.ui.hits.HitsFragment;
 import io.brainyapps.barista.util.ActivityUtils;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public final static String TAG = "ygygvggh";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +44,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         if (savedInstanceState == null) {
             MenuItem menuItem = navigationView.getMenu().getItem(0);
 
             onNavigationItemSelected(menuItem);
 
             menuItem.setChecked(true);
+
         }
     }
 
@@ -91,7 +97,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_hits) {
 
             ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
-
                     getSupportFragmentManager(),
                     new HitsFragment());
 
@@ -102,13 +107,23 @@ public class MainActivity extends AppCompatActivity
                     getSupportFragmentManager(),
                     new DrinksFragment());
 
-
         } else if (id == R.id.nav_history) {
-            //
+
+            ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
+
+                    getSupportFragmentManager(),
+                    new HistoryFragment());
+
         } else if (id == R.id.nav_cart) {
-            //
+
+            ActivityUtils.replaceFragmentInContainer(R.id.mainContainer,
+
+                    getSupportFragmentManager(),
+                    new CartFragment());
+
         } else if (id == R.id.nav_settings) {
             //
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
