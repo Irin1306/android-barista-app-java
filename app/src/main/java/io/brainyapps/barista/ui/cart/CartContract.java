@@ -21,14 +21,10 @@ public interface CartContract {
     }
 
     interface Adapter {
-        //void deleteLastElement();
 
-        //void addFirstElement(Drink drink);
+       // void addItem(Drink drink);
 
-
-        void addItem(Drink drink);
-
-        void deleteItem(Drink drink);
+       // void deleteItem(Drink drink);
     }
 
     interface Presenter {
@@ -38,12 +34,6 @@ public interface CartContract {
 
         void getDrinks();
 
-        // void deleteDrink(Drink drink);
 
-        // void saveDrink(Drink drink);
-
-        void addQty(Drink drink);
-
-        void deleteQty(Drink drink);
     }
 }

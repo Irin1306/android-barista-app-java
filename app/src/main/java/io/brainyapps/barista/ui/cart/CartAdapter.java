@@ -8,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Iterator;
 import java.util.List;
 
 import io.brainyapps.barista.MainActivity;
@@ -65,13 +63,6 @@ public class CartAdapter extends
         );
         holder.nameTextView.setText(mDrinks.get(position).getName());
 
-       /* Log.i(mTAG, "" +  holder.priceTextView.getText().toString());
-        Log.i(mTAG, "" +  holder.priceTextView.getText().toString().replaceAll("[\\D]", ""));
-        Log.i(mTAG, "" +  Integer.parseInt(holder.priceTextView.getText().toString().replaceAll("[\\D]", "")));
-
-        Log.i(mTAG, "" + holder.qtyTextView.getText().toString());
-        Log.i(mTAG, "" + Integer.parseInt(holder.qtyTextView.getText().toString()));*/
-
         int price = Integer.parseInt(holder.priceTextView.getText().toString().replaceAll("[\\D]", ""));
         int qty = Integer.parseInt(holder.qtyTextView.getText().toString());
         total = price * qty;
@@ -79,41 +70,29 @@ public class CartAdapter extends
         mView.takeTotalAmount(total);
 
 
-        holder.mainCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //
-            }
-        });
+
 
         holder.minusTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(mTAG, "" + holder.qtyTextView.getText());
+
                 String string = holder.qtyTextView.getText().toString();
-                Log.i(mTAG, string);
+
                 Integer numb = Integer.parseInt(string) - 1;
-                Log.i(mTAG, "" +  numb);
+
                 int mId = mDrinks.get(position).getId();
-                Log.i(mTAG, "position " + mDrinks.get(position).toString() + " id " + mId);
+
                 total = price * numb;
 
-                Log.i(mTAG, "-price " + -price);
                 if (numb > 0){
                     holder.qtyTextView.setText(String.valueOf(numb));
                     holder.totalTextView.setText(String.valueOf(total) + " ₴");
                     mView.takeTotalAmount(-price);
                 }
                 else {
-                   /* for (Iterator<Drink> iterator = mDrinks.iterator(); iterator.hasNext();){
-                        Object obj = iterator.next();
-                        if (obj.getId().equals(mId)) {
-                            iterator.remove();
-                        }
-                    }*/
+
                     mDrinks.remove(mDrinks.get(position));
                     notifyDataSetChanged();
-                    //notifyItemRemoved(mDrinks.indexOf(mDrinks.get(position)));
                     mView.takeTotalAmount(0);
                 }
             }
@@ -121,11 +100,11 @@ public class CartAdapter extends
         holder.plusTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(mTAG, "" + holder.qtyTextView.getText());
+
                 String string = holder.qtyTextView.getText().toString();
-                Log.i(mTAG, string);
+
                 Integer numb = Integer.parseInt(string) + 1;
-                Log.i(mTAG, "" +  numb);
+
                 holder.qtyTextView.setText(String.valueOf(numb));
                 total = price * numb;
                 holder.totalTextView.setText(String.valueOf(total) + " ₴");
@@ -144,16 +123,6 @@ public class CartAdapter extends
         return 0;
     }
 
-
-    @Override
-    public void addItem(Drink drink) {
-//
-    }
-
-    @Override
-    public void deleteItem(Drink drink) {
-//
-    }
 
 
     // ViewHolder

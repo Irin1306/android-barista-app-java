@@ -34,7 +34,6 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
 
     private RecyclerView historyListRecyclerView;
 
-    private FloatingActionButton addFab, deleteFab;
 
     private TextView deleteTv;
 
@@ -89,9 +88,7 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
             @Override
             public void onClick(View v) {
                 mDrinks.clear();
-                Log.i(mTAG, "deleteTv " + mDrinks.size() + " " + this);
-                Toast.makeText(getContext(), mDrinks.size() + " mDrinks" + "this " + this,
-                        Toast.LENGTH_SHORT).show();
+
                 mainCardView.setVisibility(View.GONE);
                 mPresenter.deleteHistory();
             }

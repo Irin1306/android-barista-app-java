@@ -71,21 +71,15 @@ public class DrinksListAdapter extends
             }
         });
 
-       /* ViewGroup.LayoutParams params =
-                holder.imageViewBig.getLayoutParams();
 
-        Toast.makeText(holder.imageViewBig.getContext(),
-                "params = " + params.width,
-                Toast.LENGTH_LONG).show();
-*/
 
-        Log.i("ddd", "" + expanded);
+
         ViewGroup.LayoutParams params =
                 holder.imageViewBig.getLayoutParams();
         ViewGroup.MarginLayoutParams margParams =
                 (ViewGroup.MarginLayoutParams) holder.imageViewBig.getLayoutParams();
         int margLeft =  margParams.getMarginStart();
-        Log.i("ddd", "" + margLeft);
+
 
         holder.imageViewBig.setOnClickListener(new View.OnClickListener() {
 
@@ -95,11 +89,6 @@ public class DrinksListAdapter extends
 
                 expanded = !expanded;
 
-                Log.i("ddd", "click" + expanded);
-
-                /*if (params.width > 276) {
-                    expanded = true;
-                }*/
                 if (expanded) {
                     params.width += 30;
                     params.height += 20;

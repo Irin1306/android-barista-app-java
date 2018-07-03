@@ -44,6 +44,7 @@ public class DrinksFragment extends Fragment
         new DrinksListPresenter(this, context.getApplicationContext());
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -73,6 +74,9 @@ public class DrinksFragment extends Fragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+
+        //if remove menu icon
+        menu.clear();
 
         inflater.inflate(R.menu.menu_search, menu);
 
@@ -149,4 +153,5 @@ public class DrinksFragment extends Fragment
 
         return true;
     }
+
 }

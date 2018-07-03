@@ -58,14 +58,6 @@ public class HistoryAdapter extends
         );
         holder.nameTextView.setText(mDrinks.get(position).getName());
 
-        holder.mainCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //
-            }
-        });
-
-
 
 
     }

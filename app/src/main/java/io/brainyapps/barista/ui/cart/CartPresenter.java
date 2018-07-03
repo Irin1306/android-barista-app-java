@@ -46,15 +46,6 @@ public class CartPresenter implements CartContract.Presenter {
         });
     }
 
-    @Override
-    public void addQty(Drink drink) {
-        //
-    }
-
-    @Override
-    public void deleteQty(Drink drink) {
-    //
-    }
 
 
 }

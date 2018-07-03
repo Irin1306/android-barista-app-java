@@ -44,12 +44,9 @@ public class HistoryPresenter implements HistoryContract.Presenter {
             @Override
             public void onDrinksLoaded(List<Drink> drinks) {
                 if (drinks.size() <= 5) {
-
                     mView.setDrinks(drinks);
-
                 }
                 else {
-
                     mDrinks = drinks.subList((drinks.size() - 6), (drinks.size() - 1));
                     mView.setDrinks(mDrinks);
                 }

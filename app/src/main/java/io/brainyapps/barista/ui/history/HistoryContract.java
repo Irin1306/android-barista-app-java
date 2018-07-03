@@ -17,9 +17,7 @@ public interface HistoryContract {
     }
 
     interface Adapter {
-        //void deleteLastElement();
-
-        //void addFirstElement(Drink drink);
+       //
     }
 
     interface Presenter {

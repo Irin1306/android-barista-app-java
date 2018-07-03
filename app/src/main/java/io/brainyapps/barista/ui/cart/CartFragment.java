@@ -106,13 +106,9 @@ public class CartFragment extends Fragment implements CartContract.View {
         if (amount != 0) {
             total += amount;
             totalTv.setText(String.valueOf(total) + " ₴");
-            Log.i(mTAG, "takeTotalAmount " + amount);
-            Log.i(mTAG, "takeTotalAmount " + String.valueOf(total) + " ₴");
+
         } else {
             total = 0;
-            Log.i(mTAG, "takeTotalAmount " + String.valueOf(total) + " ₴");
-            Toast.makeText(getContext(), mDrinks.size() + " mDrinks",
-                    Toast.LENGTH_SHORT).show();
             if(mDrinks.size() == 0) {
                 totalTv.setText(String.valueOf(total) + " ₴");
             }
