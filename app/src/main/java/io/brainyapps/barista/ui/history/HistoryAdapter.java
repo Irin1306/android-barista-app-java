@@ -21,7 +21,6 @@ public class HistoryAdapter extends
 
     private HistoryContract.View mView;
     private HistoryContract.Presenter mPresenter;
-
     private List<Drink> mDrinks;
 
 
