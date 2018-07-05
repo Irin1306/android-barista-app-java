@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "407584957023",
+    "firebase_url": "https://qalight-barista-app.firebaseio.com",
+    "project_id": "qalight-barista-app",
+    "storage_bucket": "qalight-barista-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407584957023:android:4d5c68ee161b2023",
+        "android_client_info": {
+          "package_name": "io.brainyapps.barista"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407584957023-lq6p9sbrq7j6csc3g1q6nf0ealigfg76.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.brainyapps.barista",
+            "certificate_hash": "cab1d3e0bb7f755822781b226d1a6932f0f58ebb"
+          }
+        },
+        {
+          "client_id": "407584957023-i64fp3ibhb05m9o67kifcul1s5264vbo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.brainyapps.barista",
+            "certificate_hash": "3ce93da163c88cd1ffe9b9db69d7219bb9435248"
+          }
+        },
+        {
+          "client_id": "407584957023-cfjsnos4svsjgs86tl409f4tm18es3uh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjOSlh2gZ8MRbreeVBjsL8RJyqcMh7R9Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407584957023-cfjsnos4svsjgs86tl409f4tm18es3uh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

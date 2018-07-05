@@ -1,5 +1,6 @@
 package io.brainyapps.barista;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,8 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import io.brainyapps.barista.ui.cart.CartFragment;
 import io.brainyapps.barista.ui.drinks.DrinksFragment;
@@ -25,6 +35,10 @@ public class MainActivity extends AppCompatActivity
 
     public final static String TAG = "ygygvggh";
 
+    private GoogleSignInClient mGoogleSignInClient;
+
+    private TextView nameTextView, emailTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +46,7 @@ public class MainActivity extends AppCompatActivity
         Fabric.with(this, new Crashlytics());
 
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,6 +59,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        nameTextView = navigationView.getHeaderView(0).findViewById(R.id.nameTextView);
+        emailTextView = navigationView.getHeaderView(0).findViewById(R.id.emailTextView);
 
         if (savedInstanceState == null) {
             MenuItem menuItem = navigationView.getMenu().getItem(0);
@@ -53,6 +70,71 @@ public class MainActivity extends AppCompatActivity
             menuItem.setChecked(true);
 
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // sign in
+        buildGoogleLastSignIn();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // sign in
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                handleSignInResult(task);
+            }
+        }
+    }
+
+    private void buildGoogleLastSignIn() {
+        mGoogleSignInClient = buildGoogleSignInClient();
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        signInUiUpdate(account);
+    }
+
+    private GoogleSignInClient buildGoogleSignInClient() {
+        GoogleSignInOptions gso =
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestEmail()
+                        .requestProfile()
+                        .requestScopes(Drive.SCOPE_FILE)
+                        .build();
+
+        return GoogleSignIn.getClient(this, gso);
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> task) {
+        try {
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            signInUiUpdate(account);
+        } catch (ApiException e) {
+            e.printStackTrace();
+            signInUiUpdate(null);
+        }
+    }
+
+    private void signInUiUpdate(GoogleSignInAccount account) {
+        // TODO:
+        if (account == null) {
+            signOutUiUpdate();
+            return;
+        }
+
+        nameTextView.setText(account.getDisplayName());
+        emailTextView.setText(account.getEmail());
+
+    }
+
+    private void signOutUiUpdate() {
+        // TODO:
+        nameTextView.setText(R.string.nav_header_title);
+        emailTextView.setText(R.string.nav_header_subtitle);
     }
 
     @Override
@@ -80,7 +162,23 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_sign_in) {
+
+            Intent intent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(intent, 1);
+
+            return true;
+        }
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_sign_out) {
+
+            mGoogleSignInClient.revokeAccess().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    signOutUiUpdate();
+                }
+            });
 
             return true;
         }
