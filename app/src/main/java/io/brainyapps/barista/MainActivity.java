@@ -20,10 +20,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.brainyapps.barista.ui.cart.CartFragment;
 import io.brainyapps.barista.ui.drinks.DrinksFragment;
 import io.brainyapps.barista.ui.history.HistoryFragment;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
 
     private TextView nameTextView, emailTextView;
+    private CircleImageView userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity
 
         nameTextView = navigationView.getHeaderView(0).findViewById(R.id.nameTextView);
         emailTextView = navigationView.getHeaderView(0).findViewById(R.id.emailTextView);
+        userImage = navigationView.getHeaderView(0).findViewById(R.id.userPhotoCircleImageView);
 
         if (savedInstanceState == null) {
             MenuItem menuItem = navigationView.getMenu().getItem(0);
@@ -119,12 +123,20 @@ public class MainActivity extends AppCompatActivity
         nameTextView.setText(user.getDisplayName());
         emailTextView.setText(user.getEmail());
 
+        Picasso.with(this)
+                .load(user.getPhotoUrl())
+                .noPlaceholder()
+                .error(R.drawable.user_no_photo)
+                .into(userImage);
+
     }
 
     private void signOutUiUpdate() {
-        // TODO:
-        nameTextView.setText(R.string.nav_header_title);
-        emailTextView.setText(R.string.nav_header_subtitle);
+        // TODO: стринга
+        nameTextView.setText("not logged in");
+        emailTextView.setText("");
+
+        userImage.setImageResource(R.drawable.user_no_photo);
     }
 
     @Override
