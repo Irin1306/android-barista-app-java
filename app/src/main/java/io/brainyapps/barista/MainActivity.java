@@ -14,14 +14,15 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.drive.Drive;
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Arrays;
+import java.util.List;
 
 import io.brainyapps.barista.ui.cart.CartFragment;
 import io.brainyapps.barista.ui.drinks.DrinksFragment;
@@ -33,9 +34,11 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public final static String TAG = "ygygvggh";
+    public final static String TAG = "MainActivity";
 
-    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 123;
+
+    private FirebaseAuth mAuth;
 
     private TextView nameTextView, emailTextView;
 
@@ -46,6 +49,9 @@ public class MainActivity extends AppCompatActivity
         Fabric.with(this, new Crashlytics());
 
         setContentView(R.layout.activity_main);
+
+        // firebase
+        mAuth = FirebaseAuth.getInstance();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,52 +88,36 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // sign in
-        if (requestCode == 1) {
+
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
             if (resultCode == RESULT_OK) {
-                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                handleSignInResult(task);
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                signInUiUpdate(user);
+                // ...
+            } else {
+                // TODO:
             }
         }
+
     }
 
     private void buildGoogleLastSignIn() {
-        mGoogleSignInClient = buildGoogleSignInClient();
-
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        signInUiUpdate(account);
+        FirebaseUser user = mAuth.getCurrentUser();
+        signInUiUpdate(user);
     }
 
-    private GoogleSignInClient buildGoogleSignInClient() {
-        GoogleSignInOptions gso =
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestEmail()
-                        .requestProfile()
-                        .requestScopes(Drive.SCOPE_FILE)
-                        .build();
-
-        return GoogleSignIn.getClient(this, gso);
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> task) {
-        try {
-            GoogleSignInAccount account = task.getResult(ApiException.class);
-            signInUiUpdate(account);
-        } catch (ApiException e) {
-            e.printStackTrace();
-            signInUiUpdate(null);
-        }
-    }
-
-    private void signInUiUpdate(GoogleSignInAccount account) {
+    private void signInUiUpdate(FirebaseUser user) {
         // TODO:
-        if (account == null) {
+        if (user == null) {
             signOutUiUpdate();
             return;
         }
 
-        nameTextView.setText(account.getDisplayName());
-        emailTextView.setText(account.getEmail());
+        nameTextView.setText(user.getDisplayName());
+        emailTextView.setText(user.getEmail());
 
     }
 
@@ -164,8 +154,23 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sign_in) {
 
-            Intent intent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(intent, 1);
+            // Choose authentication providers
+            List<AuthUI.IdpConfig> providers = Arrays.asList(
+                    new AuthUI.IdpConfig.EmailBuilder().build(),
+                    new AuthUI.IdpConfig.PhoneBuilder().build(),
+                    new AuthUI.IdpConfig.GoogleBuilder().build()
+                    //new AuthUI.IdpConfig.FacebookBuilder().build(),
+                    //new AuthUI.IdpConfig.TwitterBuilder().build()
+            );
+
+            // Create and launch sign-in intent
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .build(),
+                    RC_SIGN_IN);
+
 
             return true;
         }
@@ -173,12 +178,14 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sign_out) {
 
-            mGoogleSignInClient.revokeAccess().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    signOutUiUpdate();
-                }
-            });
+            AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        public void onComplete(@NonNull Task<Void> task) {
+                            signOutUiUpdate();
+                        }
+                    });
+
 
             return true;
         }
