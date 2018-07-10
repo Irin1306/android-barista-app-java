@@ -16,6 +16,8 @@ public interface DrinksListContract {
         void setDrinks(List<Drink> drinks);
 
         void showToast(Drink drink);
+
+        void startDrinkDetains(int id);
     }
 
     interface Adapter {

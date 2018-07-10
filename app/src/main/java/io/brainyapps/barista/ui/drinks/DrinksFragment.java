@@ -1,6 +1,7 @@
 package io.brainyapps.barista.ui.drinks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import io.brainyapps.barista.R;
 import io.brainyapps.barista.data.entity.Drink;
+import io.brainyapps.barista.ui.drink.DrinkActivity;
 
 
 public class DrinksFragment extends Fragment
@@ -139,6 +141,15 @@ public class DrinksFragment extends Fragment
     public void showToast(Drink drink) {
         Toast.makeText(getContext(), drink.getName() + " click",
                 Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void startDrinkDetains(int id) {
+        Intent intent = new Intent(getContext(), DrinkActivity.class);
+
+        intent.putExtra("drink_id", id);
+
+        startActivity(intent);
     }
 
     @Override

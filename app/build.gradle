@@ -10,7 +10,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "io.brainyapps.barista"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 2
         versionName "1.0"
@@ -50,7 +50,14 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
 
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
+    // firebase
+    implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
+
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.android.gms:play-services-drive:15.0.1'
 
     // room database
     implementation "android.arch.persistence.room:runtime:1.1.1"
@@ -60,3 +67,5 @@ dependencies {
         transitive = true
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
