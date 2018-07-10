@@ -3,13 +3,11 @@ package io.brainyapps.barista.ui.drinks;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -72,13 +70,11 @@ public class DrinksListAdapter extends
         });
 
 
-
-
         ViewGroup.LayoutParams params =
                 holder.imageViewBig.getLayoutParams();
         ViewGroup.MarginLayoutParams margParams =
                 (ViewGroup.MarginLayoutParams) holder.imageViewBig.getLayoutParams();
-        int margLeft =  margParams.getMarginStart();
+        int margLeft = margParams.getMarginStart();
 
 
         holder.imageViewBig.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +97,15 @@ public class DrinksListAdapter extends
                 }
                 holder.imageViewBig.setLayoutParams(params);
 
+            }
+        });
+
+        holder.mainCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mView.startDrinkDetains(
+                        mDrinks.get(holder.getAdapterPosition()).getId()
+                );
             }
         });
 
