@@ -8,6 +8,8 @@ public interface DataSource {
 
     void getAllDrinks(GetDrinksCallback callback);
 
+    void getDrinkById(int id, DrinkLoadedCallback callback);
+
     void saveDrink(Drink drink, SaveCallback callback);
 
     void deleteDrink(Drink drink, DeleteCallback callback);
@@ -25,5 +27,9 @@ public interface DataSource {
 
     interface GetDrinksCallback {
         void onDrinksLoaded(List<Drink> drinks);
+    }
+
+    interface DrinkLoadedCallback {
+        void onDlinkLoaded(Drink drink);
     }
 }

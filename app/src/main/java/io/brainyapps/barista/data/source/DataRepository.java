@@ -38,6 +38,16 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public void getDrinkById(int id, DrinkLoadedCallback callback) {
+        mLocal.getDrinkById(id, new DrinkLoadedCallback() {
+            @Override
+            public void onDlinkLoaded(Drink drink) {
+                callback.onDlinkLoaded(drink);
+            }
+        });
+    }
+
+    @Override
     public void saveDrink(Drink drink, final SaveCallback callback) {
         mLocal.saveDrink(drink, new SaveCallback() {
             @Override

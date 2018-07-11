@@ -8,8 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import io.brainyapps.barista.R;
+import io.brainyapps.barista.data.entity.Drink;
 
 
 public class DrinkFragment extends Fragment
@@ -17,11 +19,18 @@ public class DrinkFragment extends Fragment
 
     private DrinkContract.Presenter mPresenter;
 
+    private TextView nameTextView;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.getDrink();
+    }
 
     @Nullable
     @Override
@@ -31,6 +40,8 @@ public class DrinkFragment extends Fragment
         View view = inflater.inflate(R.layout.drink,
                 container, false);
 
+        nameTextView = view.findViewById(R.id.nameTextView);
+
         //
 
         return view;
@@ -39,6 +50,12 @@ public class DrinkFragment extends Fragment
     @Override
     public void setPresenter(DrinkContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void setDrink(Drink drink) {
+        // TODO:
+        nameTextView.setText(drink.getName());
     }
 
     @Override

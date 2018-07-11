@@ -16,6 +16,9 @@ public interface DrinkDao {
     @Query("SELECT * FROM drinks")
     List<Drink> getAllDrinks();
 
+    @Query("SELECT * FROM drinks WHERE id = :id")
+    Drink getDringById(int id);
+
     @Query("SELECT * FROM drinks WHERE name LIKE '%' || :searchString || '%'")
     List<Drink> getSearchResults(String searchString);
 

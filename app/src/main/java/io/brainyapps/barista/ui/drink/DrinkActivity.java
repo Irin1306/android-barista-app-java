@@ -31,6 +31,6 @@ public class DrinkActivity extends AppCompatActivity {
                 drinkFragment
         );
 
-        DrinkPresenter presenter = new DrinkPresenter(drinkFragment);
+        new DrinkPresenter(drinkFragment, id, getApplicationContext());
     }
 }

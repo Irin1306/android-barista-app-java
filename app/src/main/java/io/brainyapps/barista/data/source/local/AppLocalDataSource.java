@@ -63,6 +63,24 @@ public class AppLocalDataSource implements DataSource {
     }
 
     @Override
+    public void getDrinkById(final int id, final DrinkLoadedCallback callback) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                final Drink drink = mDrinkDao.getDringById(id);
+                mExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onDlinkLoaded(drink);
+                    }
+                });
+            }
+        };
+
+        mExecutors.diskIO().execute(runnable);
+    }
+
+    @Override
     public void saveDrink(final Drink drink, final SaveCallback callback) {
         Runnable runnable = new Runnable() {
             @Override
