@@ -92,7 +92,7 @@
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:srcCompat="@drawable/ic_local_drink_brown_24dp" />
+            app:srcCompat="@drawable/ic_shopping_cart_brown_24dp" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"

@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "drinks")
 public class Drink {
@@ -42,4 +43,7 @@ public class Drink {
     public void setName(String name) {
         this.name = name;
     }
+
+
+
 }

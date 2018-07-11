@@ -40,6 +40,8 @@ public class DrinksFragment extends Fragment
 
     private List<Drink> mDrinks;
 
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -55,12 +57,10 @@ public class DrinksFragment extends Fragment
         View view = inflater.inflate(R.layout.flagment_drinks_list,
                 container, false);
 
-        setHasOptionsMenu(true);
-
-        drinksListRecyclerView = view.findViewById
+       /* drinksListRecyclerView = view.findViewById
                 (R.id.drinksListRecyclerView);
         addFab = view.findViewById(R.id.addFab);
-        deleteFab = view.findViewById(R.id.fabDelete);
+        deleteFab = view.findViewById(R.id.fabDelete);*/
 
         return view;
     }
@@ -144,7 +144,7 @@ public class DrinksFragment extends Fragment
     }
 
     @Override
-    public void startDrinkDetains(int id) {
+    public void startDrinkDetails(int id) {
         Intent intent = new Intent(getContext(), DrinkActivity.class);
 
         intent.putExtra("drink_id", id);

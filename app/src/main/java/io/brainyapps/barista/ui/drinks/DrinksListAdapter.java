@@ -103,7 +103,7 @@ public class DrinksListAdapter extends
         holder.mainCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mView.startDrinkDetains(
+                mView.startDrinkDetails(
                         mDrinks.get(holder.getAdapterPosition()).getId()
                 );
             }
