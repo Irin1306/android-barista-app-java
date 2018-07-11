@@ -42,7 +42,7 @@ public class DrinkFragment extends Fragment
 
         nameTextView = view.findViewById(R.id.nameTextView);
 
-        //
+        // TODO: DZ. Add To Cart
 
         return view;
     }

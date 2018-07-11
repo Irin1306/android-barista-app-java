@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.List;
 
 import io.brainyapps.barista.data.AppDataInjector;
+import io.brainyapps.barista.data.entity.CartDrink;
 import io.brainyapps.barista.data.entity.Drink;
 import io.brainyapps.barista.data.source.DataRepository;
 import io.brainyapps.barista.data.source.DataSource;
@@ -64,6 +65,22 @@ public class DrinksListPresenter implements DrinksListContract.Presenter {
             @Override
             public void onDrinksLoaded(List<Drink> drinks) {
                 mView.setDrinks(drinks);
+            }
+        });
+    }
+
+    @Override
+    public void addToCart(Drink drink) {
+
+        // TODO: wrong cast type
+
+        CartDrink cartDrink = (CartDrink) drink;
+        cartDrink.setCount(1);
+
+        mData.saveCartDrink(cartDrink, new DataSource.SaveCallback() {
+            @Override
+            public void onSaved() {
+                //
             }
         });
     }

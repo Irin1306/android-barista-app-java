@@ -36,5 +36,7 @@ public interface DrinksListContract {
         void saveDrink(Drink drink);
 
         void makeSearch(String searchString);
+
+        void addToCart(Drink drink);
     }
 }

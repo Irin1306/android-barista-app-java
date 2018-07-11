@@ -79,11 +79,11 @@
             android:text="25 ₴"
             android:textColor="@color/accent"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+            app:layout_constraintBottom_toBottomOf="@+id/cartAppCompatImageView"
             app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
+            android:id="@+id/cartAppCompatImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ripple_effect"

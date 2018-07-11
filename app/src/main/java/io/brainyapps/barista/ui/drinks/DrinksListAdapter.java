@@ -1,6 +1,7 @@
 package io.brainyapps.barista.ui.drinks;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -109,6 +110,15 @@ public class DrinksListAdapter extends
             }
         });
 
+        holder.cartAppCompatImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.addToCart(mDrinks.get(
+                        holder.getAdapterPosition()
+                ));
+            }
+        });
+
     }
 
     @Override
@@ -141,6 +151,7 @@ public class DrinksListAdapter extends
         TextView nameTextView;
         TextView priceTextView;
         ImageView imageViewBig;
+        AppCompatImageView cartAppCompatImageView;
 
 
         public ViewHolder(View itemView) {
@@ -150,6 +161,7 @@ public class DrinksListAdapter extends
             nameTextView = itemView.findViewById(R.id.nameTextView);
             priceTextView = itemView.findViewById(R.id.priceTextView);
             imageViewBig = itemView.findViewById(R.id.appCompatImageViewBig);
+            cartAppCompatImageView = itemView.findViewById(R.id.cartAppCompatImageView);
         }
 
 
