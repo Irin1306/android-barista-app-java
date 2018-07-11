@@ -2,6 +2,7 @@ package io.brainyapps.barista.data.source;
 
 import java.util.List;
 
+import io.brainyapps.barista.data.entity.CartDrink;
 import io.brainyapps.barista.data.entity.Drink;
 
 public interface DataSource {
@@ -16,6 +17,11 @@ public interface DataSource {
 
     void getSearchResults(String string, GetDrinksCallback callback);
 
+    void getAllCartDrinks(GetCartDrinksCallback callback);
+
+    void saveCartDrink(CartDrink cartDrink, SaveCallback callback);
+
+    void deleteCartDrink(CartDrink cartDrink, DeleteCallback callback);
 
     interface SaveCallback {
         void onSaved();
@@ -31,5 +37,9 @@ public interface DataSource {
 
     interface DrinkLoadedCallback {
         void onDlinkLoaded(Drink drink);
+    }
+
+    interface GetCartDrinksCallback {
+        void onCartDrinksLoaded(List<CartDrink> cartDrinks);
     }
 }
