@@ -17,7 +17,7 @@ public interface DrinksListContract {
 
         void showToast(Drink drink);
 
-        void startDrinkDetains(int id);
+        void startDrinkDetails(int id);
     }
 
     interface Adapter {

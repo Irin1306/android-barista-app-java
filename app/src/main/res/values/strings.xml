@@ -9,4 +9,6 @@
     <string name="americano">Americano</string>
     <string name="_25">25 ₴</string>
     <string name="_300ml">300ml</string>
+    <string name="userName"> </string>
+    <string name="userEmail"> </string>
 </resources>

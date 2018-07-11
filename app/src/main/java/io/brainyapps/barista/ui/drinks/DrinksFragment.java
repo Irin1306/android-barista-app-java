@@ -40,6 +40,7 @@ public class DrinksFragment extends Fragment
 
     private List<Drink> mDrinks;
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -54,9 +55,6 @@ public class DrinksFragment extends Fragment
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.flagment_drinks_list,
                 container, false);
-
-        setHasOptionsMenu(true);
-
         drinksListRecyclerView = view.findViewById
                 (R.id.drinksListRecyclerView);
         addFab = view.findViewById(R.id.addFab);
@@ -78,7 +76,7 @@ public class DrinksFragment extends Fragment
         super.onCreateOptionsMenu(menu, inflater);
 
         //if remove menu icon
-        menu.clear();
+        // menu.clear();
 
         inflater.inflate(R.menu.menu_search, menu);
 
@@ -144,7 +142,7 @@ public class DrinksFragment extends Fragment
     }
 
     @Override
-    public void startDrinkDetains(int id) {
+    public void startDrinkDetails(int id) {
         Intent intent = new Intent(getContext(), DrinkActivity.class);
 
         intent.putExtra("drink_id", id);

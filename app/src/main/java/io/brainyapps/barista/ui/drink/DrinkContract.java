@@ -1,4 +1,19 @@
 package io.brainyapps.barista.ui.drink;
 
-public class DrinkContract {
+
+public interface DrinkContract {
+
+    interface View {
+        void setPresenter(DrinkContract.Presenter presenter);
+
+        void setListeners();
+
+
+    }
+
+
+    interface Presenter {
+
+
+    }
 }
