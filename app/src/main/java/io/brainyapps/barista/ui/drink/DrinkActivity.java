@@ -5,22 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import java.util.List;
-
 import io.brainyapps.barista.R;
-import io.brainyapps.barista.data.entity.Drink;
-import io.brainyapps.barista.data.source.DataRepository;
 
 public class DrinkActivity extends AppCompatActivity {
-
-    private List<Drink> mDrinks;
-
-    private Drink mDrink;
-
-    private DataRepository mData;
-
-    private int mId;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
