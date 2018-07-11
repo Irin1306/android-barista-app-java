@@ -56,7 +56,7 @@ public class DrinkFragment extends Fragment
         View view = inflater.inflate(R.layout.drink,
                 container, false);
 
-        DrinkActivity activity = (DrinkActivity) getActivity();
+       /*        DrinkActivity activity = (DrinkActivity) getActivity();
         mId = activity.getMId();
 
         Toast.makeText(getActivity(), "" + mId, Toast.LENGTH_SHORT).show();
@@ -67,11 +67,11 @@ public class DrinkFragment extends Fragment
                 mDrink = findDrink(mId, drinks);
             }
         });
-
+*/
         return view;
     }
 
-    Drink findDrink(int id, List<Drink> drinks) {
+   /* Drink findDrink(int id, List<Drink> drinks) {
         for (Drink drink : drinks) {
             if ((id + "").equals(drink.getId() + "")) {
                 return drink;
@@ -80,7 +80,7 @@ public class DrinkFragment extends Fragment
         }
         return null;
     }
-
+*/
 
 
 

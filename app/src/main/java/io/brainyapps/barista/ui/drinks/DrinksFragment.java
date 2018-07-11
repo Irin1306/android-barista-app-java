@@ -56,11 +56,10 @@ public class DrinksFragment extends Fragment
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.flagment_drinks_list,
                 container, false);
-
-       /* drinksListRecyclerView = view.findViewById
+        drinksListRecyclerView = view.findViewById
                 (R.id.drinksListRecyclerView);
         addFab = view.findViewById(R.id.addFab);
-        deleteFab = view.findViewById(R.id.fabDelete);*/
+        deleteFab = view.findViewById(R.id.fabDelete);
 
         return view;
     }
