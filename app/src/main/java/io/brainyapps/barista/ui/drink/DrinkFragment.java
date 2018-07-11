@@ -23,7 +23,6 @@ public class DrinkFragment extends Fragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        new DrinkPresenter(this, context.getApplicationContext());
     }
 
 
@@ -34,43 +33,6 @@ public class DrinkFragment extends Fragment
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drink,
                 container, false);
-
-       /*        DrinkActivity activity = (DrinkActivity) getActivity();
-        mId = activity.getMId();
-
-        Toast.makeText(getActivity(), "" + mId, Toast.LENGTH_SHORT).show();
-
-        mData.getAllDrinks(new DataSource.GetDrinksCallback() {
-            @Override
-            public void onDrinksLoaded(List<Drink> drinks) {
-                mDrink = findDrink(mId, drinks);
-            }
-        });
-*/
         return view;
     }
-
-   /* Drink findDrink(int id, List<Drink> drinks) {
-        for (Drink drink : drinks) {
-            if ((id + "").equals(drink.getId() + "")) {
-                return drink;
-            }
-
-        }
-        return null;
-    }
-*/
-
-
-    @Override
-    public void setPresenter(DrinkContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
-
-    @Override
-    public void setListeners() {
-
-    }
-
-
 }
