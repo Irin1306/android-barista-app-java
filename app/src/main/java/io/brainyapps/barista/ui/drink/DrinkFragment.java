@@ -17,9 +17,6 @@ public class DrinkFragment extends Fragment
 
     private DrinkContract.Presenter mPresenter;
 
-    private DrinkContract.View mView = this;
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -33,6 +30,19 @@ public class DrinkFragment extends Fragment
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drink,
                 container, false);
+
+        //
+
         return view;
+    }
+
+    @Override
+    public void setPresenter(DrinkContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
     }
 }

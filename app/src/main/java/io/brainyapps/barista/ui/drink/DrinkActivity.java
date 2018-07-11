@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import io.brainyapps.barista.R;
+import io.brainyapps.barista.util.ActivityUtils;
 
 public class DrinkActivity extends AppCompatActivity {
 
@@ -21,5 +22,15 @@ public class DrinkActivity extends AppCompatActivity {
         Toast.makeText(this, "id = " + id, Toast.LENGTH_SHORT).show();
 
         setContentView(R.layout.content_main);
+
+        DrinkFragment drinkFragment = new DrinkFragment();
+
+        ActivityUtils.replaceFragmentInContainer(
+                R.id.mainContainer,
+                getSupportFragmentManager(),
+                drinkFragment
+        );
+
+        DrinkPresenter presenter = new DrinkPresenter(drinkFragment);
     }
 }

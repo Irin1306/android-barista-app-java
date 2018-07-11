@@ -1,19 +1,21 @@
 package io.brainyapps.barista.ui.drink;
 
-import io.brainyapps.barista.data.entity.Drink;
-import io.brainyapps.barista.data.source.DataRepository;
-
 public class DrinkPresenter implements DrinkContract.Presenter {
 
     private DrinkContract.View mView;
 
-    private Drink mDrink;
+    public DrinkPresenter(DrinkContract.View view) {
+        mView = view;
 
-    private DataRepository mData;
-
-    public DrinkPresenter() {
+        start();
     }
 
+    @Override
+    public void start() {
+        mView.setPresenter(this);
 
+        if (mView != null && mView.isActive()) {
+            // TODO: что то делаем
+        }
+    }
 }
-
