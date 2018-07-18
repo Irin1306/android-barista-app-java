@@ -1,27 +1,21 @@
 package io.brainyapps.barista.ui.drink;
 
 
-
-import java.util.List;
-
 import io.brainyapps.barista.data.entity.Drink;
 
 public interface DrinkContract {
 
     interface View {
-        void setPresenter(DrinkContract.Presenter presenter);
+        void setPresenter(Presenter presenter);
 
-        void setListeners();
+        void setDrink(Drink drink);
 
-
+        boolean isActive();
     }
 
-
-
     interface Presenter {
+        void start();
 
-
-
-
+        void getDrink();
     }
 }

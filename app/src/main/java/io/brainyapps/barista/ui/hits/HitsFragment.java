@@ -15,7 +15,6 @@ import java.util.List;
 
 import io.brainyapps.barista.R;
 import io.brainyapps.barista.data.entity.Drink;
-import io.brainyapps.barista.ui.history.HistoryContract;
 
 public class HitsFragment extends Fragment implements HitsContract.View {
 

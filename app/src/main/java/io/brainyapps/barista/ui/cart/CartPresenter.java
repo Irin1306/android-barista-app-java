@@ -8,7 +8,6 @@ import io.brainyapps.barista.data.AppDataInjector;
 import io.brainyapps.barista.data.entity.Drink;
 import io.brainyapps.barista.data.source.DataRepository;
 import io.brainyapps.barista.data.source.DataSource;
-import io.brainyapps.barista.ui.history.HistoryContract;
 
 
 public class CartPresenter implements CartContract.Presenter {

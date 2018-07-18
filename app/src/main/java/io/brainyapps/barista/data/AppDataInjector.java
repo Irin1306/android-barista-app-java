@@ -14,7 +14,8 @@ public class AppDataInjector {
         return DataRepository.getInstance(
                 AppLocalDataSource.getInstance(
                         new AppExecutors(),
-                        database.drinkDao()
+                        database.drinkDao(),
+                        database.cartDao()
                 )
         );
     }

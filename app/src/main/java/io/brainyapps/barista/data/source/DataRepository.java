@@ -2,6 +2,7 @@ package io.brainyapps.barista.data.source;
 
 import java.util.List;
 
+import io.brainyapps.barista.data.entity.CartDrink;
 import io.brainyapps.barista.data.entity.Drink;
 
 public class DataRepository implements DataSource {
@@ -38,6 +39,16 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public void getDrinkById(int id, DrinkLoadedCallback callback) {
+        mLocal.getDrinkById(id, new DrinkLoadedCallback() {
+            @Override
+            public void onDlinkLoaded(Drink drink) {
+                callback.onDlinkLoaded(drink);
+            }
+        });
+    }
+
+    @Override
     public void saveDrink(Drink drink, final SaveCallback callback) {
         mLocal.saveDrink(drink, new SaveCallback() {
             @Override
@@ -63,6 +74,36 @@ public class DataRepository implements DataSource {
             @Override
             public void onDrinksLoaded(List<Drink> drinks) {
                 callback.onDrinksLoaded(drinks);
+            }
+        });
+    }
+
+    @Override
+    public void getAllCartDrinks(GetCartDrinksCallback callback) {
+        mLocal.getAllCartDrinks(new GetCartDrinksCallback() {
+            @Override
+            public void onCartDrinksLoaded(List<CartDrink> cartDrinks) {
+                callback.onCartDrinksLoaded(cartDrinks);
+            }
+        });
+    }
+
+    @Override
+    public void saveCartDrink(CartDrink cartDrink, SaveCallback callback) {
+        mLocal.saveCartDrink(cartDrink, new SaveCallback() {
+            @Override
+            public void onSaved() {
+                callback.onSaved();
+            }
+        });
+    }
+
+    @Override
+    public void deleteCartDrink(CartDrink cartDrink, DeleteCallback callback) {
+        mLocal.deleteCartDrink(cartDrink, new DeleteCallback() {
+            @Override
+            public void onDeleted() {
+                callback.onDeleted();
             }
         });
     }

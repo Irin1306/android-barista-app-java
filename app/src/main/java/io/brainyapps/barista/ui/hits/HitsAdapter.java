@@ -7,13 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import io.brainyapps.barista.R;
 import io.brainyapps.barista.data.entity.Drink;
-import io.brainyapps.barista.ui.history.HistoryContract;
 
 public class HitsAdapter extends RecyclerView.Adapter<HitsAdapter.ViewHolder> implements HitsContract.Adapter{
     private HitsContract.View mView;

@@ -41,7 +41,6 @@ public class DrinksFragment extends Fragment
     private List<Drink> mDrinks;
 
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -77,7 +76,7 @@ public class DrinksFragment extends Fragment
         super.onCreateOptionsMenu(menu, inflater);
 
         //if remove menu icon
-       // menu.clear();
+        // menu.clear();
 
         inflater.inflate(R.menu.menu_search, menu);
 

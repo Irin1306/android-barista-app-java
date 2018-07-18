@@ -150,18 +150,8 @@ public class MainActivity extends AppCompatActivity
     private void buildGoogleLastSignIn() {
         FirebaseUser user = mAuth.getCurrentUser();
         signInUiUpdate(user);
-        if (user == null) {
-            // SharedPreferences.Editor editor = preferences.edit();
-            // editor.putBoolean("user", false);
-            // editor.commit();}
-            loggedIn = false;
 
-        } else {
-            // SharedPreferences.Editor editor = preferences.edit();
-            // editor.putBoolean("user", true);
-            // editor.commit();}
-            loggedIn = true;
-        }
+        loggedIn = user != null;
 
     }
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainCardView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -52,7 +51,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatImageViewBig"
-            tools:text="Espresso" />
+            android:text="qwe" />
 
         <TextView
             android:id="@+id/descriptionTextView"
@@ -63,7 +62,6 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-
             android:maxLength="100"
             android:textAllCaps="true"
             android:textColor="@color/accent"
@@ -73,7 +71,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-            tools:text="Composition: 70% Arabica, 30% Robusta" />
+            android:text="Composition: 70% Arabica, 30% Robusta" />
 
         <TextView
             android:id="@+id/idTextView"
@@ -94,11 +92,11 @@
             android:text="25 ₴"
             android:textColor="@color/accent"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+            app:layout_constraintBottom_toBottomOf="@+id/cartAppCompatImageView"
             app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
+            android:id="@+id/cartAppCompatImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="32dp"
