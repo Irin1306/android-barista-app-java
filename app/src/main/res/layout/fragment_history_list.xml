@@ -17,6 +17,23 @@
         android:background="@color/highlight"
         android:padding="8dp">
 
+        <TextView
+            android:id="@+id/emptyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@color/highlight"
+            android:padding="8dp"
+            android:text="No history yet"
+            android:textAlignment="center"
+            android:textColor="@color/accent"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
         <android.support.v7.widget.CardView
             android:id="@+id/mainCardView"
             android:layout_width="match_parent"
@@ -27,21 +44,25 @@
             app:cardElevation="0dp"
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="true"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:visibility="gone" >
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!--<TextView
+                <TextView
                     android:id="@+id/textView3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:text="item"
+                    android:text="@string/order"
                     android:textAllCaps="true"
                     android:textColor="@color/accent"
                     android:textSize="14sp"
@@ -54,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="price"
+                    android:text="@string/date"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/accent"
@@ -68,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="qty"
+                    android:text="@string/status"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/accent"
@@ -85,7 +106,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:gravity="end"
-                    android:text="total"
+                    android:text="@string/total"
                     android:textAlignment="textEnd"
                     android:textAllCaps="true"
                     android:textColor="@color/accent"
@@ -95,7 +116,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline9" />
 
--->
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/historyListRecyclerView"
                     android:layout_width="match_parent"
@@ -112,9 +133,11 @@
                     android:id="@+id/deleteTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorStar"
                     android:padding="8dp"
-                    android:text="delete history"
+                    android:background="@drawable/ripple3"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/delete_history"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/accent"
@@ -125,6 +148,46 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/historyListRecyclerView" />
 
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="35dp" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.4" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.6" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.8" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/accent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
             </android.support.constraint.ConstraintLayout>
 

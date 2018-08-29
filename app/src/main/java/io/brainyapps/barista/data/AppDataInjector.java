@@ -15,7 +15,10 @@ public class AppDataInjector {
                 AppLocalDataSource.getInstance(
                         new AppExecutors(),
                         database.drinkDao(),
-                        database.cartDao()
+                        database.cartDao(),
+                        database.orderDao(),
+                        database.orderItemDao(),
+                        database.orderOrderItemsDao()
                 )
         );
     }

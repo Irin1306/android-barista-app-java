@@ -14,22 +14,22 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/highlight">
+    android:background="@color/highlight"
+    android:padding="8dp">
 
-        <android.support.v7.widget.RecyclerView
+        <!--<android.support.v7.widget.RecyclerView-->
+        <io.brainyapps.barista.GridRecycleView
             android:id="@+id/drinksListRecyclerView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scrollIndicators="none"
             android:scrollbarStyle="outsideInset"
             android:scrollbars="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
+            android:textAlignment="center"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/addFab"

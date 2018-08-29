@@ -11,11 +11,16 @@ public interface DrinkContract {
         void setDrink(Drink drink);
 
         boolean isActive();
+
+        void setListeners();
+
+        void startDialog();
     }
 
     interface Presenter {
-        void start();
 
         void getDrink();
+
+        void addToCart(Drink drink);
     }
 }

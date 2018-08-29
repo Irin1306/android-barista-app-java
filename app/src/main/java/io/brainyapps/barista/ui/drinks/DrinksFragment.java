@@ -16,13 +16,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.GridLayoutAnimationController;
+import android.view.animation.LayoutAnimationController;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
 
+import io.brainyapps.barista.MainActivity;
 import io.brainyapps.barista.R;
+import io.brainyapps.barista.data.entity.CartDrink;
 import io.brainyapps.barista.data.entity.Drink;
 import io.brainyapps.barista.ui.drink.DrinkActivity;
+import io.brainyapps.barista.util.DisplayAlertDialog;
 
 
 public class DrinksFragment extends Fragment
@@ -32,7 +40,9 @@ public class DrinksFragment extends Fragment
 
     private DrinksListContract.Adapter mAdapter;
 
-    private RecyclerView drinksListRecyclerView;
+    private io.brainyapps.barista.GridRecycleView drinksListRecyclerView;
+
+    private SearchView mSearchView;
 
     private FloatingActionButton addFab, deleteFab;
 
@@ -40,11 +50,15 @@ public class DrinksFragment extends Fragment
 
     private List<Drink> mDrinks;
 
+    private Animation mAnimation;
+
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         new DrinksListPresenter(this, context.getApplicationContext());
+
     }
 
 
@@ -55,8 +69,17 @@ public class DrinksFragment extends Fragment
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.flagment_drinks_list,
                 container, false);
+
+        setHasOptionsMenu(true);
+
         drinksListRecyclerView = view.findViewById
                 (R.id.drinksListRecyclerView);
+
+        int resId = R.anim.grid_layout_animation_from_bottom;
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), resId);
+        drinksListRecyclerView.setLayoutAnimation(animation);
+
+
         addFab = view.findViewById(R.id.addFab);
         deleteFab = view.findViewById(R.id.fabDelete);
 
@@ -67,9 +90,20 @@ public class DrinksFragment extends Fragment
     public void onStart() {
         super.onStart();
         mPresenter.getDrinks();
-
         setListeners();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mSearchView != null) {
+
+            mSearchView.setQuery("", true);
+            mSearchView.setOnQueryTextListener(this);
+        }
+        setListeners();
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -82,8 +116,8 @@ public class DrinksFragment extends Fragment
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
 
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setOnQueryTextListener(this);
+        mSearchView = (SearchView) menuItem.getActionView();
+        mSearchView.setOnQueryTextListener(this);
 
     }
 
@@ -99,12 +133,14 @@ public class DrinksFragment extends Fragment
 
     @Override
     public void setListeners() {
+
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Drink drink = new Drink("Espresso" + (mDrinks.size() + 1));//("Drink " + (mDrinks.size() + 1));
+                final Drink drink = new Drink("Espresso" + (mDrinks.size() + 1 ), 300,25);//("Drink " + (mDrinks.size() + 1));
 
                 mPresenter.saveDrink(drink);
+                mPresenter.getDrinks();
             }
         });
 
@@ -129,15 +165,32 @@ public class DrinksFragment extends Fragment
                 new DrinksListAdapter(mView, mPresenter, drinks);
 
         GridLayoutManager gridHorizontal =
-                new GridLayoutManager(getActivity(), 2, GridLayoutManager.HORIZONTAL, false);
+                new GridLayoutManager(getActivity(), 3, GridLayoutManager.HORIZONTAL, false);
+
+
         drinksListRecyclerView.setLayoutManager(gridHorizontal);
 
         drinksListRecyclerView.setAdapter(drinksListAdapter);
+
+        runLayoutAnimation(drinksListRecyclerView);
+    }
+
+
+    private void runLayoutAnimation(final RecyclerView recyclerView) {
+
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
     @Override
     public void showToast(Drink drink) {
-        Toast.makeText(getContext(), drink.getName() + " click",
+        Toast.makeText(getContext(), drink.getName() + "drink click",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showToast(CartDrink cartDrink) {
+        Toast.makeText(getContext(), cartDrink.getName() + "cartDrink click",
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -145,9 +198,16 @@ public class DrinksFragment extends Fragment
     public void startDrinkDetails(int id) {
         Intent intent = new Intent(getContext(), DrinkActivity.class);
 
+        //Toast.makeText(getContext(), "Drinks Fragment id = " + id, Toast.LENGTH_SHORT).show();
         intent.putExtra("drink_id", id);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void startDialog() {
+        DisplayAlertDialog.displayAlertDialog(getContext(), R.string.dialog_add_to_cart, R.string.go);
+
     }
 
     @Override
@@ -163,4 +223,30 @@ public class DrinksFragment extends Fragment
         return true;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mSearchView.setOnQueryTextListener(null);
+        //Toast.makeText(getContext(), "Drinks Fragment onPause Adapter " + (mAdapter != null), Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //Toast.makeText(getContext(), "Drinks Fragment onStop", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        //Toast.makeText(getContext(), "Drinks Fragment onDetach", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //Toast.makeText(getContext(), "Drinks Fragment onDestroy", Toast.LENGTH_SHORT).show();
+    }
 }

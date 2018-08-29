@@ -17,7 +17,7 @@ public interface DrinkDao {
     List<Drink> getAllDrinks();
 
     @Query("SELECT * FROM drinks WHERE id = :id")
-    Drink getDringById(int id);
+    Drink getDrinkById(int id);
 
     @Query("SELECT * FROM drinks WHERE name LIKE '%' || :searchString || '%'")
     List<Drink> getSearchResults(String searchString);
@@ -27,4 +27,7 @@ public interface DrinkDao {
 
     @Delete
     void deleteDrink(Drink drink);
+
+    @Query("DELETE FROM drinks")
+    void deleteAllDrinks();
 }

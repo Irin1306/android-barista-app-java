@@ -6,9 +6,37 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="nav_menu_hits">Hits</string>
+    <string name="nav_menu_drinks">Drinks</string>
+    <string name="nav_menu_history">History</string>
+    <string name="nav_menu_cart">Cart</string>
+    <string name="nav_menu_misc">Misc</string>
+
+    <string name="sign_in">sign_in</string>
+    <string name="sign_out">sign_out</string>
+
     <string name="americano">Americano</string>
     <string name="_25">25 ₴</string>
     <string name="_300ml">300ml</string>
+
     <string name="userName"> </string>
     <string name="userEmail"> </string>
+
+    <string name="dialog_add_to_cart">Go to cart?</string>
+    <string name="dialog_make_order">Order was saved. Go to history?</string>
+    <string name="go">go</string>
+    <string name="cancel">cancel</string>
+
+    <string name="order">order#</string>
+    <string name="date">date</string>
+    <string name="status">status</string>
+    <string name="delete_history">delete history</string>
+
+    <string name="item">item</string>
+    <string name="price">price</string>
+    <string name="qty">qty</string>
+    <string name="total">total</string>
+    <string name="make_order">make order</string>
+    <string name="back_to_shopping">back to shopping</string>
+
 </resources>

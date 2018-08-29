@@ -1,9 +1,12 @@
 package io.brainyapps.barista.ui.drinks;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
+import io.brainyapps.barista.MainActivity;
 import io.brainyapps.barista.data.AppDataInjector;
 import io.brainyapps.barista.data.entity.CartDrink;
 import io.brainyapps.barista.data.entity.Drink;
@@ -11,6 +14,7 @@ import io.brainyapps.barista.data.source.DataRepository;
 import io.brainyapps.barista.data.source.DataSource;
 
 public class DrinksListPresenter implements DrinksListContract.Presenter {
+    private String mTAG = MainActivity.TAG;
 
     private DrinksListContract.View mView;
     private DrinksListContract.Adapter mAdapter;
@@ -51,9 +55,11 @@ public class DrinksListPresenter implements DrinksListContract.Presenter {
 
     @Override
     public void saveDrink(Drink drink) {
+
         mData.saveDrink(drink, new DataSource.SaveCallback() {
             @Override
             public void onSaved() {
+                //Log.i(mTAG, "Long id " + id);
                 mAdapter.addFirstElement(drink);
             }
         });
@@ -72,15 +78,33 @@ public class DrinksListPresenter implements DrinksListContract.Presenter {
     @Override
     public void addToCart(Drink drink) {
 
-        // TODO: wrong cast type
+        CartDrink _cartDrink = new CartDrink(drink.getName(), drink.getMl(), drink.getPrice());
+        _cartDrink.setCount(1);
 
-        CartDrink cartDrink = (CartDrink) drink;
-        cartDrink.setCount(1);
-
-        mData.saveCartDrink(cartDrink, new DataSource.SaveCallback() {
+        mData.getCartDrinkByName(_cartDrink.getName(), new DataSource.CartDrinkLoadedCallback() {
             @Override
-            public void onSaved() {
-                //
+            public void onCartDrinkLoaded(final CartDrink cartDrink) {
+
+                if (cartDrink != null) {
+                    cartDrink.setCount(cartDrink.getCount() + 1);
+
+                    mData.saveCartDrink(cartDrink, new DataSource.SaveCallback() {
+                        @Override
+                        public void onSaved() {
+                           mView.startDialog();
+                        }
+                    });
+                } else {
+
+                    mData.saveCartDrink(_cartDrink, new DataSource.SaveCallback() {
+                        @Override
+                        public void onSaved() {
+                            mView.startDialog();
+                        }
+                    });
+
+                }
+
             }
         });
     }

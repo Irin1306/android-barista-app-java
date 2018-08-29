@@ -1,18 +1,24 @@
 package io.brainyapps.barista;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.Group;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +36,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.brainyapps.barista.data.source.DataRepository;
+import io.brainyapps.barista.data.source.DataSource;
+import io.brainyapps.barista.data.source.local.dao.DrinkDao;
 import io.brainyapps.barista.ui.cart.CartFragment;
 import io.brainyapps.barista.ui.drinks.DrinksFragment;
 import io.brainyapps.barista.ui.history.HistoryFragment;
@@ -44,25 +53,32 @@ public class MainActivity extends AppCompatActivity
 
     private static final int RC_SIGN_IN = 123;
 
+    public static final String ITEM_IND = "item_ind";
+
     private FirebaseAuth mAuth;
 
     private TextView nameTextView, emailTextView;
     private CircleImageView userImage;
-    ImageView arrowImage;
+    private ImageView arrowImage;
     private View navHeaderMain;
     private NavigationView navigationView;
+    private AnimatedVectorDrawable mArrowUpDrawable, mArrowDownDrawable;
+    //private Animation mAnimationDown, mAnimationUp;
+
     private Menu menu;
 
     private int itemInd = 0;
+
     private Boolean loggedIn = false;
     private Boolean menuLoggedIn = false;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Fabric.with(this, new Crashlytics());
+        // Fabric.with(this, new Crashlytics());
 
         setContentView(R.layout.activity_main);
 
@@ -89,6 +105,17 @@ public class MainActivity extends AppCompatActivity
         arrowImage = navigationView.getHeaderView(0).findViewById(R.id.layoutParent).findViewById(R.id.arrowImageView);
         navHeaderMain = navigationView.getHeaderView(0);
 
+
+        // mArrowDownDrawable = (AnimatedVectorDrawable) getDrawable(R.drawable.ic_arrow_down_animatable);
+        // mArrowUpDrawable = (AnimatedVectorDrawable) getDrawable(R.drawable.ic_arrow_up_animatable);
+        mArrowDownDrawable = (AnimatedVectorDrawable) getResources().getDrawable(R.drawable.ic_arrow_down_animatable);
+        mArrowUpDrawable = (AnimatedVectorDrawable) getResources().getDrawable(R.drawable.ic_arrow_up_animatable);
+
+       // mAnimationDown = AnimationUtils.loadAnimation(navHeaderMain.getContext(), R.anim.fall_down_20);
+
+
+        itemInd = getIntent().getIntExtra("item_ind", 0);
+        //Log.i(TAG, "itemInd " + itemInd);
         if (savedInstanceState == null) {
             MenuItem menuItem = menu.getItem(itemInd);
 
@@ -99,6 +126,15 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+        /*arrowImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation rotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_icon);
+                arrowImage.startAnimation(rotation);
+                Toast.makeText(getApplicationContext(), "find is selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+*/
 
 
     @Override
@@ -106,6 +142,7 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
         // sign in
         buildGoogleLastSignIn();
+
     }
 
     @Override
@@ -118,6 +155,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     menuLoggedIn = !menuLoggedIn;
+
                     prepareMenu(itemInd);
 
                 }
@@ -156,7 +194,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void signInUiUpdate(FirebaseUser user) {
-        // TODO:
+
         if (user == null) {
             signOutUiUpdate();
             return;
@@ -172,16 +210,18 @@ public class MainActivity extends AppCompatActivity
                 .into(userImage);
 
         prepareMenu(itemInd);
+
     }
 
     private void signOutUiUpdate() {
-        // TODO: стринга
+
         nameTextView.setText(R.string.userName);
         emailTextView.setText(R.string.userEmail);
 
         userImage.setImageResource(R.drawable.user_no_photo);
 
         prepareMenu(itemInd);
+
     }
 
     @Override
@@ -191,17 +231,19 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
             menuLoggedIn = false;
             prepareMenu(itemInd);
+
         } else {
             super.onBackPressed();
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
-    }
+    }*/
 
 
     public void prepareMenu(int itemInd) {
@@ -213,13 +255,17 @@ public class MainActivity extends AppCompatActivity
 
             menu.add(menu.NONE, action_sign_in, 1, "Login");
 
-            arrowImage.setImageResource(R.drawable.ic_arrow_drop_up_brown_24dp);
+            //arrowImage.setImageResource(R.drawable.ic_arrow_drop_up_brown_24dp);
+            arrowImage.setImageDrawable(mArrowDownDrawable);
+            mArrowDownDrawable.start();
 
         } else if (menuLoggedIn && loggedIn) {
 
             menu.add(menu.NONE, action_sign_out, 1, "Logout");
 
-            arrowImage.setImageResource(R.drawable.ic_arrow_drop_up_brown_24dp);
+            //arrowImage.setImageResource(R.drawable.ic_arrow_drop_up_brown_24dp);
+            arrowImage.setImageDrawable(mArrowDownDrawable);
+            mArrowDownDrawable.start();
 
         } else if (!menuLoggedIn) {
 
@@ -227,7 +273,9 @@ public class MainActivity extends AppCompatActivity
             MenuItem menuItem = menu.getItem(itemInd);
             menuItem.setChecked(true);
 
-            arrowImage.setImageResource(R.drawable.ic_arrow_drop_down_brown_24dp);
+            //arrowImage.setImageResource(R.drawable.ic_arrow_drop_down_brown_24dp);
+            arrowImage.setImageDrawable(mArrowUpDrawable);
+            mArrowUpDrawable.start();
 
         }
 
@@ -363,13 +411,29 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         menuLoggedIn = false;
-        Toast.makeText(this, "itemInd" + itemInd, Toast.LENGTH_LONG).show();
+        // Toast.makeText(this, "itemInd" + itemInd, Toast.LENGTH_LONG).show();
 
 
         return true;
     }
 
 
+    /*public void showAlertDialog(int message, int positiveButton) {
+        FragmentManager fm = getSupportFragmentManager();
+        MyAlertDialogFragment alertDialog = MyAlertDialogFragment.newInstance(message, positiveButton);
+        alertDialog.show(fm, "fragment_alert");
+    }
+
+    public void doPositiveClick() {
+        // Do stuff here.
+        Log.i("FragmentAlertDialog", "Positive click!");
+    }
+
+    public void doNegativeClick() {
+        // Do stuff here.
+        Log.i("FragmentAlertDialog", "Negative click!");
+    }
+*/
     @Override
     protected void onPause() {
         super.onPause();
@@ -380,8 +444,18 @@ public class MainActivity extends AppCompatActivity
         if (navHeaderMain != null) {
             navHeaderMain.setOnClickListener(null);
         }
-
+       // Toast.makeText(this, "Main Activity onPause", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Toast.makeText(this, "Main Activity onPause", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Toast.makeText(this, "Main Activity onDestroy", Toast.LENGTH_SHORT).show();
+    }
 }

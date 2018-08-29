@@ -9,19 +9,26 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import io.brainyapps.barista.data.entity.CartDrink;
-import io.brainyapps.barista.data.entity.Drink;
+
 
 @Dao
 public interface CartDao {
 
     @Query("SELECT * FROM cart")
-    List<CartDrink> getALlCart();
+    List<CartDrink> getAllCart();
+
+    @Query("SELECT * FROM cart WHERE id = :id")
+    CartDrink getCartDrinkById(int id);
+
+    @Query("SELECT * FROM cart WHERE name = :name")
+    CartDrink getCartDrinkByName(String name);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveCartDrink(Drink drink);
+    void saveCartDrink(CartDrink cartDrink);
 
     @Delete
     void deleteCartDrink(CartDrink cartDrink);
 
-    // TODO: Delete all?
+    @Query("DELETE FROM cart")
+    void deleteAllCart();
 }

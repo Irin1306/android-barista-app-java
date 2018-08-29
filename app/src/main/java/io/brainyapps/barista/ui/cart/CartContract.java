@@ -1,8 +1,11 @@
 package io.brainyapps.barista.ui.cart;
 
+import android.content.Context;
+
 import java.util.List;
 
-import io.brainyapps.barista.data.entity.Drink;
+import io.brainyapps.barista.data.entity.CartDrink;
+import io.brainyapps.barista.data.entity.Order;
 
 
 public interface CartContract {
@@ -14,17 +17,28 @@ public interface CartContract {
 
         void setListeners();
 
-        void setDrinks(List<Drink> drinks);
+        void setDrinks(List<CartDrink> cartDrinks);
 
-        void takeTotalAmount(Integer amount);
+        void takeTotalAmount(double total);
+
+        void startDialog();
+
+        void showToast(List<CartDrink> cartDrinks);
+
+        void showToast(CartDrink cartDrink);
+
 
     }
 
     interface Adapter {
 
-       // void addItem(Drink drink);
+        void setCount(CartDrink cartDink, CartAdapter.ViewHolder holder);
 
-       // void deleteItem(Drink drink);
+        void deleteItem(CartDrink cartDink, int position);
+
+        void makeOrder();
+
+        void refresh();
     }
 
     interface Presenter {
@@ -34,6 +48,14 @@ public interface CartContract {
 
         void getDrinks();
 
+        void getCount(CartDrink cartDink, CartAdapter.ViewHolder holder, int count);
 
+        void deleteDrink(CartDrink cartDrink, int position);
+
+       // void saveOrder(Order order);
+
+        void saveOrderAndReturnId(Order order, List<CartDrink> cartDrinks);
+
+        //void saveOrderItems(String name, List<CartDrink> cartDrinks);
     }
 }

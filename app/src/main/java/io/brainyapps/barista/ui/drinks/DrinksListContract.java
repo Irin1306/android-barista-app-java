@@ -2,6 +2,7 @@ package io.brainyapps.barista.ui.drinks;
 
 import java.util.List;
 
+import io.brainyapps.barista.data.entity.CartDrink;
 import io.brainyapps.barista.data.entity.Drink;
 
 public interface DrinksListContract {
@@ -17,7 +18,11 @@ public interface DrinksListContract {
 
         void showToast(Drink drink);
 
+        void showToast(CartDrink cartDrink);
+
         void startDrinkDetails(int id);
+
+        void startDialog();
     }
 
     interface Adapter {
